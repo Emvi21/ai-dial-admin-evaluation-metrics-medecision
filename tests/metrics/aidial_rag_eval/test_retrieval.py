@@ -1,6 +1,5 @@
 """Tests for retrieval metric integration."""
 
-
 import pandas as pd
 import pytest
 

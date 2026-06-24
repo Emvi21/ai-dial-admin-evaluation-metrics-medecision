@@ -1,4 +1,5 @@
 """Base class for deepeval-backed metrics."""
+
 import logging
 import math
 import os

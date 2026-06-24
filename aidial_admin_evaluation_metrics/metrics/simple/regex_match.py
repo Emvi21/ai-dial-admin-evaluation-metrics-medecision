@@ -16,7 +16,9 @@ from aidial_admin_evaluation_metrics.metrics.common.types import (
 class RegexMatchMetric(BaseMetric):
     name: str = "regex_match"
     display_name: str = "Regex Match"
-    description: str = "Checks if the actual matches the regular expression provided in ground_truth."
+    description: str = (
+        "Checks if the actual matches the regular expression provided in ground_truth."
+    )
 
     class Config(BaseModel):
         pattern: Annotated[

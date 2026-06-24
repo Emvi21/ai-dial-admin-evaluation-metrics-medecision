@@ -2,6 +2,7 @@
 Script to generate API documentation from FastAPI OpenAPI schema.
 Uses only FastAPI's built-in tools - no external dependencies needed.
 """
+
 import argparse
 import json
 from pathlib import Path

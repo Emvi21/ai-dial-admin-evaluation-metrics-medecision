@@ -17,15 +17,15 @@ class MetricExample(BaseModel):
 
     model_config = ConfigDict(arbitrary_types_allowed=True)
 
-    name: Optional[
-        str
-    ] = None  # If omitted, auto-generated from metric name at serialization time
+    name: Optional[str] = (
+        None  # If omitted, auto-generated from metric name at serialization time
+    )
     description: Optional[str] = None  # What this example demonstrates
     input: Any  # Metric Input instance or plain dict
     expected_output: Any  # Metric Output instance or plain dict
-    config: Optional[
-        Any
-    ] = None  # Metric Config instance or plain dict; None means use defaults
+    config: Optional[Any] = (
+        None  # Metric Config instance or plain dict; None means use defaults
+    )
 
 
 class BaseMetric:

@@ -1,6 +1,5 @@
 """Retrieval metric using ai-dial-rag-eval library."""
 
-
 from aidial_rag_eval.facts.citation import CitationMatcher
 from aidial_rag_eval.facts.exact import ExactStringMatcher
 from aidial_rag_eval.retrieval.metrics import calculate_metrics
@@ -60,7 +59,9 @@ class RetrievalMetric(BaseMetric):
 
     name: str = "aidial_rag_eval.retrieval"
     display_name: str = "DIAL RAG Eval: Retrieval"
-    description: str = "Evaluates RAG retrieval based on the ground truth facts using ai-dial-rag-eval library. Supports configurable matching strategies: fuzzy citation matching (default) or exact equality matching."
+    description: str = (
+        "Evaluates RAG retrieval based on the ground truth facts using ai-dial-rag-eval library. Supports configurable matching strategies: fuzzy citation matching (default) or exact equality matching."
+    )
 
     class Config(BaseModel):
         """Configuration for retrieval metric."""

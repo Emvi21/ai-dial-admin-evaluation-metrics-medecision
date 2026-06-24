@@ -1,0 +1,136 @@
+interactions:
+- request:
+    body: '{"messages":[{"content":"Given the input, expected output, and retrieval
+      context, please generate a list of JSON objects to determine whether each node
+      in the retrieval context was remotely useful in arriving at the expected output.\n\n            **\n            IMPORTANT:
+      Please make sure to only return in JSON format, with the ''verdicts'' key as
+      a list of JSON. These JSON only contain the `verdict` key that outputs only
+      ''yes'' or ''no'', and a `reason` key to justify the verdict. In your reason,
+      you should aim to quote parts of the context .\n            Example Retrieval
+      Context: [\"Einstein won the Nobel Prize for his discovery of the photoelectric
+      effect\", \"He won the Nobel Prize in 1968.\", \"There was a cat.\"]\n            Example
+      Input: \"Who won the Nobel Prize in 1968 and for what?\"\n            Example
+      Expected Output: \"Einstein won the Nobel Prize in 1968 for his discovery of
+      the photoelectric effect.\"\n\n            Example:\n            {\n                \"verdicts\":
+      [\n                    {\n                        \"reason\": \"It clearly addresses
+      the question by stating that ''Einstein won the Nobel Prize for his discovery
+      of the photoelectric effect.''\",\n                        \"verdict\": \"yes\"\n                    },\n                    {\n                        \"reason\":
+      \"The text verifies that the prize was indeed won in 1968.\",\n                        \"verdict\":
+      \"yes\"\n                    },\n                    {\n                        \"reason\":
+      \"''There was a cat'' is not at all relevant to the topic of winning a Nobel
+      Prize.\",\n                        \"verdict\": \"no\"\n                    }\n                ]  \n            }\n            Since
+      you are going to generate a verdict for each context, the number of ''verdicts''
+      SHOULD BE STRICTLY EQUAL to that of the contexts.\n            **\n\n            Input:\n            What
+      is the diameter of the Earth?\n\n            Expected output:\n            The
+      diameter of the Earth is approximately 12,742 kilometers.\n\n            Retrieval
+      Context  (2 documents):\n            [''The Earth has a diameter of approximately
+      12,742 kilometers.'', ''The Earth is the third planet from the Sun.'']\n\n            JSON:\n","role":"user"}],"model":null,"stream":true,"stream_options":{"include_usage":true},"tool_choice":{"type":"function","function":{"name":"Verdicts"}},"tools":[{"type":"function","function":{"name":"Verdicts","description":"","parameters":{"properties":{"verdicts":{"items":{"properties":{"verdict":{"type":"string"},"reason":{"type":"string"}},"required":["verdict","reason"],"type":"object"},"type":"array"}},"required":["verdicts"],"type":"object"}}}]}'
+    headers:
+      Content-Type:
+      - application/json
+      api-key:
+      - REDACTED
+      authorization:
+      - REDACTED
+      host:
+      - dial.test.example.com
+    method: POST
+    uri: https://dial.test.example.com/openai/deployments/gemini-2.5-flash-lite/chat/completions?api-version=2023-12-01-preview
+  response:
+    body:
+      string: 'data: {"choices":[{"index":0,"finish_reason":null,"delta":{"role":"assistant"}}],"usage":null,"id":"4c4ee417-f7be-4d50-b35d-bb04f8e1ae59","created":1775479767,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":null,"tool_calls":[{"index":0,"id":"Verdicts_1","type":"function","function":{"name":"Verdicts","arguments":"{\"verdicts\":
+        [{\"reason\": \"The text directly answers the question by stating ''The Earth
+        has a diameter of approximately 12,742 kilometers.''\", \"verdict\": \"yes\"},
+        {\"reason\": \"This text, ''The Earth is the third planet from the Sun,''
+        does not provide any information about the Earth''s diameter.\", \"verdict\":
+        \"no\"}]}"}}]}}],"usage":null,"id":"4c4ee417-f7be-4d50-b35d-bb04f8e1ae59","created":1775479767,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":""}}],"usage":null,"id":"4c4ee417-f7be-4d50-b35d-bb04f8e1ae59","created":1775479767,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":"tool_calls","delta":{}}],"usage":{"prompt_tokens":461,"completion_tokens":63,"total_tokens":524},"id":"4c4ee417-f7be-4d50-b35d-bb04f8e1ae59","created":1775479767,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: [DONE]
+
+
+        '
+    headers:
+      Content-Type:
+      - text/event-stream; charset=utf-8
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"messages":[{"content":"Given the input, retrieval contexts, and contextual
+      precision score, provide a CONCISE summary for the score. Explain why it is
+      not higher, but also why it is at its current score.\n            The retrieval
+      contexts is a list of JSON with three keys: `verdict`, `reason` (reason for
+      the verdict) and `node`. `verdict` will be either ''yes'' or ''no'', which represents
+      whether the corresponding ''node'' in the retrieval context is relevant to the
+      input. \n            Contextual precision represents if the relevant nodes are
+      ranked higher than irrelevant nodes. Also note that retrieval contexts is given
+      IN THE ORDER OF THEIR RANKINGS.\n\n            **\n            IMPORTANT: Please
+      make sure to only return in JSON format, with the ''reason'' key providing the
+      reason.\n            Example JSON:\n            {\n                \"reason\":
+      \"The score is <contextual_precision_score> because <your_reason>.\"\n            }\n\n\n            DO
+      NOT mention ''verdict'' in your reason, but instead phrase it as irrelevant
+      nodes. The term ''verdict'' is just here for you to understand the broader scope
+      of things.\n            Also DO NOT mention there are `reason` fields in the
+      retrieval contexts you are presented with, instead just use the information
+      in the `reason` field.\n            In your reason, you MUST USE the `reason`,
+      QUOTES in the ''reason'', and the node RANK (starting from 1, eg. first node)
+      to explain why the ''no'' verdicts should be ranked lower than the ''yes'' verdicts.\n            When
+      addressing nodes, make it explicit that they are nodes in retrieval contexts.\n            If
+      the score is 1, keep it short and say something positive with an upbeat tone
+      (but don''t overdo it otherwise it gets annoying).\n            **\n\n            Contextual
+      Precision Score:\n            1.00\n\n            Input:\n            What is
+      the diameter of the Earth?\n\n            Retrieval Contexts:\n            [{''verdict'':
+      ''yes'', ''reason'': \"The text directly answers the question by stating ''The
+      Earth has a diameter of approximately 12,742 kilometers.''\"}, {''verdict'':
+      ''no'', ''reason'': \"This text, ''The Earth is the third planet from the Sun,''
+      does not provide any information about the Earth''s diameter.\"}]\n\n            JSON:\n","role":"user"}],"model":null,"stream":true,"stream_options":{"include_usage":true},"tool_choice":{"type":"function","function":{"name":"ContextualPrecisionScoreReason"}},"tools":[{"type":"function","function":{"name":"ContextualPrecisionScoreReason","description":"","parameters":{"properties":{"reason":{"type":"string"}},"required":["reason"],"type":"object"}}}]}'
+    headers:
+      Content-Type:
+      - application/json
+      api-key:
+      - REDACTED
+      authorization:
+      - REDACTED
+      host:
+      - dial.test.example.com
+    method: POST
+    uri: https://dial.test.example.com/openai/deployments/gemini-2.5-flash-lite/chat/completions?api-version=2023-12-01-preview
+  response:
+    body:
+      string: 'data: {"choices":[{"index":0,"finish_reason":null,"delta":{"role":"assistant"}}],"usage":null,"id":"0c7ac5c5-254b-436f-94ff-641f0e035ade","created":1775479769,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":null,"tool_calls":[{"index":0,"id":"ContextualPrecisionScoreReason_1","type":"function","function":{"name":"ContextualPrecisionScoreReason","arguments":"{\"reason\":
+        \"The score is 1.00 because the most relevant node, which clearly answers
+        the question about the Earth''s diameter, is ranked first. The irrelevant
+        node, which only states that the Earth is the third planet from the Sun and
+        does not mention its diameter, is ranked lower, as expected.\"}"}}]}}],"usage":null,"id":"0c7ac5c5-254b-436f-94ff-641f0e035ade","created":1775479769,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":""}}],"usage":null,"id":"0c7ac5c5-254b-436f-94ff-641f0e035ade","created":1775479769,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":"tool_calls","delta":{}}],"usage":{"prompt_tokens":499,"completion_tokens":67,"total_tokens":566},"id":"0c7ac5c5-254b-436f-94ff-641f0e035ade","created":1775479769,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: [DONE]
+
+
+        '
+    headers:
+      Content-Type:
+      - text/event-stream; charset=utf-8
+    status:
+      code: 200
+      message: OK
+version: 1

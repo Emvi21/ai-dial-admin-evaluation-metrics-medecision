@@ -1,0 +1,796 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "ai-dial-admin-evaluation-metrics",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/metrics": {
+      "get": {
+        "summary": "Metrics",
+        "operationId": "metrics_metrics_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MetricsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/evaluate": {
+      "post": {
+        "summary": "Evaluate",
+        "operationId": "evaluate_evaluate_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvaluationRequest"
+              },
+              "examples": {
+                "exact_match matches": {
+                  "value": {
+                    "metric_name": "exact_match",
+                    "config": {},
+                    "input": {
+                      "actual": "test answer",
+                      "ground_truth": "test answer"
+                    }
+                  }
+                },
+                "exact_match does not match": {
+                  "value": {
+                    "metric_name": "exact_match",
+                    "config": {},
+                    "input": {
+                      "actual": "wrong answer",
+                      "ground_truth": "test answer"
+                    }
+                  }
+                },
+                "regex_match matches": {
+                  "value": {
+                    "metric_name": "regex_match",
+                    "config": {
+                      "pattern": "test\\s\\w+"
+                    },
+                    "input": {
+                      "actual": "test answer"
+                    }
+                  }
+                },
+                "regex_match error": {
+                  "value": {
+                    "metric_name": "regex_match",
+                    "config": {
+                      "pattern": "test\\s("
+                    },
+                    "input": {
+                      "actual": "test answer"
+                    }
+                  }
+                },
+                "aidial_rag_eval.retrieval": {
+                  "value": {
+                    "metric_name": "aidial_rag_eval.retrieval",
+                    "config": {
+                      "matcher": "citation"
+                    },
+                    "input": {
+                      "ground_truth_facts": [
+                        "The diameter of the Earth is approximately 12,742 kilometers.",
+                        "The Pacific Ocean is the largest and deepest of Earth's oceanic divisions."
+                      ],
+                      "retrieved_context": [
+                        "The Earth, our home planet, is the third planet from the sun.",
+                        "It's the only planet known to have an atmosphere containing free oxygen and oceans of liquid water on its surface. The diameter of the Earth is approximately 12,742 kilometers.",
+                        "The Pacific Ocean is extending from the Arctic Ocean in the north to the Southern Ocean in the south."
+                      ]
+                    }
+                  }
+                },
+                "aidial_rag_eval.nli": {
+                  "value": {
+                    "metric_name": "aidial_rag_eval.nli",
+                    "config": {
+                      "model": "gemini-2.5-flash-lite"
+                    },
+                    "input": {
+                      "premise": "The Earth is the third planet from the Sun. The diameter of the Earth is approximately 12,742 kilometers.",
+                      "hypothesis": "The Earth has a diameter of about 12,742 km."
+                    }
+                  }
+                },
+                "aidial_rag_eval.generation": {
+                  "value": {
+                    "metric_name": "aidial_rag_eval.generation",
+                    "config": {
+                      "model": "gemini-2.5-flash-lite"
+                    },
+                    "input": {
+                      "question": "What is the diameter of Earth?",
+                      "ground_truth_answer": "The diameter of the Earth is approximately 12,742 kilometers.",
+                      "context": [
+                        "The Earth is the third planet from the Sun.",
+                        "The diameter of the Earth is approximately 12,742 kilometers, making it the fifth largest planet."
+                      ],
+                      "answer": "Earth has a diameter of about 12,742 km.",
+                      "documents": [
+                        "earth_facts.txt"
+                      ]
+                    }
+                  }
+                },
+                "aidial_rag_eval.rag_eval": {
+                  "value": {
+                    "metric_name": "aidial_rag_eval.rag_eval",
+                    "config": {
+                      "matcher": "citation",
+                      "model": "gemini-2.5-flash-lite"
+                    },
+                    "input": {
+                      "question": "What is the diameter of Earth?",
+                      "ground_truth_answer": "The diameter of Earth is about 12,742 km.",
+                      "ground_truth_facts": [
+                        "Earth fact"
+                      ],
+                      "context": [
+                        "Earth facts"
+                      ],
+                      "answer": "Earth is 12,742 km wide."
+                    }
+                  }
+                },
+                "deepeval.answer_relevancy": {
+                  "value": {
+                    "metric_name": "deepeval.answer_relevancy",
+                    "config": {
+                      "model": "gemini-2.5-flash-lite",
+                      "threshold": 0.5,
+                      "strict_mode": false,
+                      "include_reason": true
+                    },
+                    "input": {
+                      "input": "What is the diameter of the Earth?",
+                      "actual_output": "The diameter of the Earth is approximately 12,742 kilometers."
+                    }
+                  }
+                },
+                "deepeval.faithfulness": {
+                  "value": {
+                    "metric_name": "deepeval.faithfulness",
+                    "config": {
+                      "model": "gemini-2.5-flash-lite",
+                      "threshold": 0.5,
+                      "strict_mode": false,
+                      "include_reason": true,
+                      "penalize_ambiguous_claims": false
+                    },
+                    "input": {
+                      "input": "What is the diameter of the Earth?",
+                      "actual_output": "The diameter of the Earth is approximately 12,742 kilometers.",
+                      "retrieval_context": [
+                        "The Earth has a diameter of approximately 12,742 kilometers."
+                      ]
+                    }
+                  }
+                },
+                "deepeval.contextual_precision": {
+                  "value": {
+                    "metric_name": "deepeval.contextual_precision",
+                    "config": {
+                      "model": "gemini-2.5-flash-lite",
+                      "threshold": 0.5,
+                      "strict_mode": false,
+                      "include_reason": true
+                    },
+                    "input": {
+                      "input": "What is the diameter of the Earth?",
+                      "actual_output": "The diameter of the Earth is approximately 12,742 kilometers.",
+                      "expected_output": "The diameter of the Earth is approximately 12,742 kilometers.",
+                      "retrieval_context": [
+                        "The Earth has a diameter of approximately 12,742 kilometers.",
+                        "The Earth is the third planet from the Sun."
+                      ]
+                    }
+                  }
+                },
+                "deepeval.contextual_recall": {
+                  "value": {
+                    "metric_name": "deepeval.contextual_recall",
+                    "config": {
+                      "model": "gemini-2.5-flash-lite",
+                      "threshold": 0.5,
+                      "strict_mode": false,
+                      "include_reason": true
+                    },
+                    "input": {
+                      "input": "What is the diameter of the Earth?",
+                      "expected_output": "The diameter of the Earth is approximately 12,742 kilometers.",
+                      "retrieval_context": [
+                        "The Earth has a diameter of approximately 12,742 kilometers.",
+                        "The Earth orbits the Sun at a distance of about 150 million kilometers."
+                      ]
+                    }
+                  }
+                },
+                "deepeval.contextual_relevancy": {
+                  "value": {
+                    "metric_name": "deepeval.contextual_relevancy",
+                    "config": {
+                      "model": "gemini-2.5-flash-lite",
+                      "threshold": 0.5,
+                      "strict_mode": false,
+                      "include_reason": true
+                    },
+                    "input": {
+                      "input": "What is the diameter of the Earth?",
+                      "retrieval_context": [
+                        "The Earth has a diameter of approximately 12,742 kilometers.",
+                        "The Earth is the third planet from the Sun."
+                      ]
+                    }
+                  }
+                },
+                "deepeval.g_eval": {
+                  "value": {
+                    "metric_name": "deepeval.g_eval",
+                    "config": {
+                      "model": "gemini-2.5-flash-lite",
+                      "threshold": 0.5,
+                      "strict_mode": false,
+                      "eval_name": "Correctness",
+                      "criteria": "Determine whether the actual output is factually correct based on the expected output.",
+                      "evaluation_params": [
+                        "actual_output",
+                        "expected_output"
+                      ]
+                    },
+                    "input": {
+                      "input": "What is the diameter of the Earth?",
+                      "actual_output": "The diameter of the Earth is approximately 12,742 kilometers.",
+                      "expected_output": "The diameter of the Earth is approximately 12,742 kilometers."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "Health",
+        "operationId": "health_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "EvaluationRequest": {
+        "properties": {
+          "metric_name": {
+            "type": "string",
+            "title": "Metric Name"
+          },
+          "config": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Config"
+          },
+          "input": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Input"
+          }
+        },
+        "type": "object",
+        "required": [
+          "metric_name",
+          "input"
+        ],
+        "title": "EvaluationRequest"
+      },
+      "EvaluationResponse": {
+        "properties": {
+          "metric_name": {
+            "type": "string",
+            "title": "Metric Name"
+          },
+          "output": {
+            "additionalProperties": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/MetricOutputField"
+                },
+                {
+                  "$ref": "#/components/schemas/MetricError"
+                }
+              ],
+              "description": "The result of a metric field, which can be either an output value or an error. The 'type' field indicates which one it is.",
+              "discriminator": {
+                "propertyName": "type",
+                "mapping": {
+                  "error": "#/components/schemas/MetricError",
+                  "value": "#/components/schemas/MetricOutputField"
+                }
+              }
+            },
+            "type": "object",
+            "title": "Output",
+            "description": "A dictionary mapping metric output field names to their corresponding results."
+          }
+        },
+        "type": "object",
+        "required": [
+          "metric_name",
+          "output"
+        ],
+        "title": "EvaluationResponse",
+        "examples": [
+          {
+            "metric_name": "exact_match",
+            "output": {
+              "exact_match": {
+                "details": {},
+                "type": "value",
+                "value": 1.0
+              }
+            }
+          },
+          {
+            "metric_name": "exact_match",
+            "output": {
+              "exact_match": {
+                "details": {},
+                "type": "value",
+                "value": 0.0
+              }
+            }
+          },
+          {
+            "metric_name": "regex_match",
+            "output": {
+              "regex_match": {
+                "details": {},
+                "type": "value",
+                "value": 1.0
+              }
+            }
+          },
+          {
+            "metric_name": "regex_match",
+            "output": {
+              "regex_match": {
+                "message": "Invalid regular expression pattern: missing ), unterminated subpattern at position 6",
+                "type": "error"
+              }
+            }
+          },
+          {
+            "metric_name": "aidial_rag_eval.retrieval",
+            "output": {
+              "f1": {
+                "details": {},
+                "type": "value",
+                "value": 0.57
+              },
+              "mrr": {
+                "details": {},
+                "type": "value",
+                "value": 0.625
+              },
+              "precision": {
+                "details": {},
+                "type": "value",
+                "value": 0.67
+              },
+              "recall": {
+                "details": {
+                  "context_highlight": [
+                    "",
+                    "",
+                    ""
+                  ],
+                  "context_relevance": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "facts_ranks": [
+                    1,
+                    -1
+                  ]
+                },
+                "type": "value",
+                "value": 0.5
+              }
+            }
+          },
+          {
+            "metric_name": "aidial_rag_eval.nli",
+            "output": {
+              "inference": {
+                "details": {
+                  "highlight": "{\"corpus\": [{\"text\": \"The Earth has a diameter of about 12,742 km.\", \"score\": 0.0, \"title\": 1.0}, {\"text\": \"\", \"score\": 0.0}]}",
+                  "json_explanation": "[{\"inference\": 1.0, \"hypothesis\": \"The Earth has a diameter of about 12,742 km.\", \"premise\": [\"The Earth is the third planet from the Sun. The diameter of the Earth is approximately 12,742 kilometers.\"], \"explanation\": \"[{\\\"explanation\\\": \\\"The statement directly repeats information given in the premise about the Earth's diameter.\\\", \\\"tag\\\": \\\"ENT\\\", \\\"statement\\\": \\\"The Earth has a diameter of about 12,742 km.\\\"}]\"}]"
+                },
+                "type": "value",
+                "value": 1.0
+              }
+            }
+          },
+          {
+            "metric_name": "aidial_rag_eval.generation",
+            "output": {
+              "answer_to_ground_truth": {
+                "details": {
+                  "highlight": "{\"corpus\": [{\"text\": \"The diameter of Earth is about 12,742 km.\", \"score\": 0.0, \"title\": 1.0}, {\"text\": \"\", \"score\": 0.0}]}",
+                  "json_explanation": "[{\"inference\": 1.0, \"hypothesis\": \"The diameter of Earth is about 12,742 km.\", \"premise\": [\"What is the diameter of Earth?\nEarth is 12,742 km wide.\"], \"explanation\": \"[{\\\"explanation\\\": \\\"The statement directly confirms the width of the Earth as given in the premise.\\\", \\\"tag\\\": \\\"ENT\\\", \\\"statement\\\": \\\"The diameter of Earth is about 12,742 km.\\\"}]\"}]"
+                },
+                "type": "value",
+                "value": 1.0
+              },
+              "context_to_answer": {
+                "details": {
+                  "highlight": "{\"corpus\": [{\"text\": \"Earth is 12,742 km wide.\", \"score\": -1.0, \"title\": 0.0}, {\"text\": \"\", \"score\": 0.0}]}",
+                  "json_explanation": "[{\"inference\": 0.0, \"hypothesis\": \"Earth is 12,742 km wide.\", \"premise\": [\"Earth facts\"], \"explanation\": \"[{\\\"explanation\\\": \\\"The premise is too general and does not provide the specific width of the Earth, making this statement neutral.\\\", \\\"tag\\\": \\\"NEUT\\\", \\\"statement\\\": \\\"Earth is 12,742 km wide.\\\"}]\"}]"
+                },
+                "type": "value",
+                "value": 0.0
+              },
+              "ground_truth_to_answer": {
+                "details": {
+                  "highlight": "{\"corpus\": [{\"text\": \"Earth is 12,742 km wide.\", \"score\": 0.0, \"title\": 1.0}, {\"text\": \"\", \"score\": 0.0}]}",
+                  "json_explanation": "[{\"inference\": 1.0, \"hypothesis\": \"Earth is 12,742 km wide.\", \"premise\": [\"What is the diameter of Earth?\nThe diameter of Earth is about 12,742 km.\"], \"explanation\": \"[{\\\"explanation\\\": \\\"The statement directly restates the diameter of Earth as given in the premise.\\\", \\\"tag\\\": \\\"ENT\\\", \\\"statement\\\": \\\"Earth is 12,742 km wide.\\\"}]\"}]"
+                },
+                "type": "value",
+                "value": 1.0
+              }
+            }
+          },
+          {
+            "metric_name": "aidial_rag_eval.rag_eval",
+            "output": {
+              "answer_to_ground_truth": {
+                "details": {
+                  "highlight": "{\"corpus\": [{\"text\": \"The diameter of Earth is about 12,742 km.\", \"score\": 0.0, \"title\": 1.0}, {\"text\": \"\", \"score\": 0.0}]}",
+                  "json_explanation": "[{\"inference\": 1.0, \"hypothesis\": \"The diameter of Earth is about 12,742 km.\", \"premise\": [\"What is the diameter of Earth?\nEarth is 12,742 km wide.\"], \"explanation\": \"[{\\\"explanation\\\": \\\"The statement directly confirms the width of the Earth as given in the premise.\\\", \\\"tag\\\": \\\"ENT\\\", \\\"statement\\\": \\\"The diameter of Earth is about 12,742 km.\\\"}]\"}]"
+                },
+                "type": "value",
+                "value": 1.0
+              },
+              "context_to_answer": {
+                "details": {
+                  "highlight": "{\"corpus\": [{\"text\": \"Earth is 12,742 km wide.\", \"score\": -1.0, \"title\": 0.0}, {\"text\": \"\", \"score\": 0.0}]}",
+                  "json_explanation": "[{\"inference\": 0.0, \"hypothesis\": \"Earth is 12,742 km wide.\", \"premise\": [\"Earth facts\"], \"explanation\": \"[{\\\"explanation\\\": \\\"The premise is too general and does not provide the specific width of the Earth, making this statement neutral.\\\", \\\"tag\\\": \\\"NEUT\\\", \\\"statement\\\": \\\"Earth is 12,742 km wide.\\\"}]\"}]"
+                },
+                "type": "value",
+                "value": 0.0
+              },
+              "f1": {
+                "details": {},
+                "type": "value",
+                "value": 1.0
+              },
+              "ground_truth_to_answer": {
+                "details": {
+                  "highlight": "{\"corpus\": [{\"text\": \"Earth is 12,742 km wide.\", \"score\": 0.0, \"title\": 1.0}, {\"text\": \"\", \"score\": 0.0}]}",
+                  "json_explanation": "[{\"inference\": 1.0, \"hypothesis\": \"Earth is 12,742 km wide.\", \"premise\": [\"What is the diameter of Earth?\nThe diameter of Earth is about 12,742 km.\"], \"explanation\": \"[{\\\"explanation\\\": \\\"The statement directly restates the diameter of Earth as given in the premise.\\\", \\\"tag\\\": \\\"ENT\\\", \\\"statement\\\": \\\"Earth is 12,742 km wide.\\\"}]\"}]"
+                },
+                "type": "value",
+                "value": 1.0
+              },
+              "mrr": {
+                "details": {},
+                "type": "value",
+                "value": 1.0
+              },
+              "precision": {
+                "details": {},
+                "type": "value",
+                "value": 1.0
+              },
+              "recall": {
+                "details": {
+                  "context_highlight": [
+                    "{\"match\": [{\"text\": \"Earth fact\", \"facts\": [0]}, {\"text\": \"s\", \"facts\": []}]}"
+                  ],
+                  "context_relevance": [
+                    1
+                  ],
+                  "facts_ranks": [
+                    0
+                  ]
+                },
+                "type": "value",
+                "value": 1.0
+              }
+            }
+          },
+          {
+            "metric_name": "deepeval.answer_relevancy",
+            "output": {
+              "score": {
+                "details": {
+                  "reason": "The output directly answers the question about the diameter of the Earth.",
+                  "verbose_logs": "Statements:\n['The diameter of the Earth is approximately 12,742 kilometers.']\n \nVerdicts:\n[AnswerRelevancyVerdict(verdict='yes', reason=None)]"
+                },
+                "type": "value",
+                "value": 1.0
+              }
+            }
+          },
+          {
+            "metric_name": "deepeval.faithfulness",
+            "output": {
+              "score": {
+                "details": {
+                  "reason": "The answer is fully supported by the retrieved context.",
+                  "verbose_logs": "Truths:\n['The Earth has a diameter of approximately 12,742 kilometers.']\n \nClaims:\n['The diameter of the Earth is approximately 12,742 kilometers.']"
+                },
+                "type": "value",
+                "value": 1.0
+              }
+            }
+          },
+          {
+            "metric_name": "deepeval.contextual_precision",
+            "output": {
+              "score": {
+                "details": {
+                  "reason": "The most relevant context node is ranked first.",
+                  "verbose_logs": "Verdicts:\n[ContextualPrecisionVerdict(verdict=True, reason='Directly states the diameter.')]"
+                },
+                "type": "value",
+                "value": 1.0
+              }
+            }
+          },
+          {
+            "metric_name": "deepeval.contextual_recall",
+            "output": {
+              "score": {
+                "details": {
+                  "reason": "All statements in the expected output are supported by the retrieved context.",
+                  "verbose_logs": "Verdicts:\n[VerdictWithExpectedOutput(verdict=True, reason='Directly stated in context.')]"
+                },
+                "type": "value",
+                "value": 1.0
+              }
+            }
+          },
+          {
+            "metric_name": "deepeval.contextual_relevancy",
+            "output": {
+              "score": {
+                "details": {
+                  "reason": "Only one of the two retrieved context nodes is relevant to the question.",
+                  "verbose_logs": "Verdicts:\n[ContextualRelevancyVerdicts(verdicts=[...])]"
+                },
+                "type": "value",
+                "value": 0.5
+              }
+            }
+          },
+          {
+            "metric_name": "deepeval.g_eval",
+            "output": {
+              "score": {
+                "details": {
+                  "reason": "The actual output exactly matches the expected output.",
+                  "verbose_logs": "Criteria:\nDetermine whether the actual output is factually correct based on the expected output."
+                },
+                "type": "value",
+                "value": 1.0
+              }
+            }
+          }
+        ]
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "HealthResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "default": "ok"
+          }
+        },
+        "type": "object",
+        "title": "HealthResponse"
+      },
+      "MetricError": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "error",
+            "title": "Type",
+            "default": "error"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "description": "Error message describing the issue"
+          }
+        },
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "title": "MetricError"
+      },
+      "MetricOutputField": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "value",
+            "title": "Type",
+            "default": "value"
+          },
+          "value": {
+            "type": "number",
+            "title": "Value",
+            "description": "The numeric value of the metric output"
+          },
+          "details": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Details",
+            "description": "Additional details about the metric output",
+            "default": {}
+          }
+        },
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "title": "MetricOutputField"
+      },
+      "MetricsDescription": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "display_name": {
+            "type": "string",
+            "title": "Display Name"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "config_schema": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Config Schema"
+          },
+          "input_schema": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Input Schema"
+          },
+          "output_schema": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Output Schema"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "display_name",
+          "description",
+          "config_schema",
+          "input_schema",
+          "output_schema"
+        ],
+        "title": "MetricsDescription"
+      },
+      "MetricsResponse": {
+        "properties": {
+          "metrics": {
+            "items": {
+              "$ref": "#/components/schemas/MetricsDescription"
+            },
+            "type": "array",
+            "title": "Metrics"
+          }
+        },
+        "type": "object",
+        "required": [
+          "metrics"
+        ],
+        "title": "MetricsResponse"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

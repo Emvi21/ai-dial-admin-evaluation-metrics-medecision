@@ -1,0 +1,130 @@
+[project]
+name = "aidial-admin-evaluation-metrics"
+version = "0.1.0"
+description = "Service for calculating evaluation metrics for LLM workloads."
+authors = [{ name = "EPAM RAIL", email = "SpecialEPM-DIALDevTeam@epam.com" }]
+license = "Apache-2.0"
+readme = "README.md"
+keywords = ["ai"]
+classifiers = [
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.14",
+    "Framework :: FastAPI",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Testing",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+requires-python = "^3.14"
+dynamic = ["dependencies"]
+
+
+[project.urls]
+Homepage = "https://dialx.ai"
+Repository = "https://github.com/epam/ai-dial-admin-evaluation-metrics"
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.dependencies]
+aidial-rag-eval = ">=0.5.0"
+langchain = "^1.3.9"
+langchain-openai = "^1.1.14"
+aiohttp = "^3.14.1"
+jinja2 = "^3.1.2"
+fastapi = "^0.128.0"
+uvicorn = {extras = ["standard"], version = "^0.40.0"}
+pydantic = "^2.12.5"
+pydantic-settings = "^2.14.2"
+opentelemetry-instrumentation = "^0.61b0"
+opentelemetry-instrumentation-logging = "^0.61b0"
+opentelemetry-instrumentation-fastapi = "^0.61b0"
+opentelemetry-instrumentation-system-metrics = "^0.61b0"
+opentelemetry-exporter-otlp-proto-grpc = "^1.40.0"
+opentelemetry-exporter-prometheus = "^0.61b0"
+opentelemetry-sdk = "^1.40.0"
+opentelemetry-distro = "^0.61b0"
+opentelemetry-instrumentation-asyncio = "^0.61b0"
+opentelemetry-instrumentation-threading = "^0.61b0"
+opentelemetry-instrumentation-urllib = "^0.61b0"
+opentelemetry-instrumentation-wsgi = "^0.61b0"
+opentelemetry-instrumentation-asgi = "^0.61b0"
+opentelemetry-instrumentation-httpx = "^0.61b0"
+opentelemetry-instrumentation-starlette = "^0.61b0"
+deepeval = "^3.8.9"
+opentelemetry-exporter-otlp-proto-http = "^1.40.0"
+opentelemetry-semantic-conventions = "^0.61b0"
+ragas = "^0.4.3"
+deepdiff = "^9.0.0"
+langsmith = "^0.8.18"
+
+[tool.poetry.group.test.dependencies]
+pytest = "^9.0.3"
+pytest-asyncio = "^1.3.0"
+pytest-recording = "^0.13.2"
+vcrpy = "^8.2.1"
+python-dotenv = "^1.0.0"
+httpx = "^0.28.1"
+pytest-env = "^1.6.0"
+
+
+[tool.poetry.group.lint.dependencies]
+flake8 = "^7.3.0"
+black = { version = "^26.3.1", extras = ["jupyter"] }
+isort = "^5.12.0"
+pyright = {extras = ["nodejs"], version = "^1.1.408"}
+autoflake = "^2.2.0"
+
+[tool.poetry.group.nox.dependencies]
+nox = "^2025.11.12"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+filterwarnings = [
+    "error",
+    "ignore:Core Pydantic V1 functionality isn't compatible with Python 3.14 or greater:UserWarning",
+    "ignore:'asyncio.iscoroutinefunction' is deprecated:DeprecationWarning",
+]
+markers = [
+    "integration: integration tests with recorded HTTP interactions (may be slow on first run)",
+]
+
+[tool.pytest_env]
+DEEPEVAL_TELEMETRY_OPT_OUT = 1
+
+[tool.pyright]
+typeCheckingMode = "basic"
+reportDeprecated = "error"
+reportUnusedVariable = "error"
+reportIncompatibleMethodOverride = "error"
+exclude = [".git", ".venv", ".nox", "**/__pycache__", "allure-results"]
+
+[tool.black]
+line-length = 80
+exclude = '''
+/(
+    \.git
+    | \.venv
+    | \.nox
+    | \.__pycache__
+    | allure-results
+)/
+'''
+
+[tool.isort]
+line_length = 80
+profile = "black"
+skip = [".venv", ".nox", "allure-results"]
+
+[tool.autoflake]
+ignore_init_module_imports = true
+remove_all_unused_imports = true
+in_place = true
+recursive = true
+quiet = true
+exclude = ["\\.venv", "\\.nox", "allure-results"]

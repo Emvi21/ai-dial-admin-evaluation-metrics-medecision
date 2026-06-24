@@ -1,0 +1,186 @@
+interactions:
+- request:
+    body: '{"messages":[{"content":"Based on the input and context, please generate
+      a JSON object to indicate whether each statement found in the context is relevant
+      to the provided input. The JSON will be a list of ''verdicts'', with 2 mandatory
+      fields: ''verdict'' and ''statement'', and 1 optional field: ''reason''.\n            You
+      should first extract statements found in the context, which are high level information
+      found in the context, before deciding on a verdict and optionally a reason for
+      each statement.\n            The ''verdict'' key should STRICTLY be either ''yes''
+      or ''no'', and states whether the statement is relevant to the input.\n            Provide
+      a ''reason'' ONLY IF verdict is no. You MUST quote the irrelevant parts of the
+      statement to back up your reason.\nIf provided context contains no actual content
+      or statements then: give \"no\" as a \"verdict\",\nput context into \"statement\",
+      and \"No statements found in provided context.\" into \"reason\".\n            **\n            IMPORTANT:
+      Please make sure to only return in JSON format.\n            Example Context:
+      \"Einstein won the Nobel Prize for his discovery of the photoelectric effect.
+      He won the Nobel Prize in 1968. There was a cat.\"\n            Example Input:
+      \"What were some of Einstein''s achievements?\"\n\n            Example:\n            {\n                \"verdicts\":
+      [\n                    {\n                        \"statement\": \"Einstein
+      won the Nobel Prize for his discovery of the photoelectric effect in 1968\",\n                        \"verdict\":
+      \"yes\"\n                    },\n                    {\n                        \"statement\":
+      \"There was a cat.\",\n                        \"reason\": \"The retrieval context
+      contained the information ''There was a cat'' when it has nothing to do with
+      Einstein''s achievements.\",\n                        \"verdict\": \"no\"\n                    }\n                ]\n            }\n            **\n\n            Input:\n            What
+      is the diameter of the Earth?\n\n            Context:\n            The Earth
+      is the third planet from the Sun.\n\n            JSON:\n","role":"user"}],"model":null,"stream":true,"stream_options":{"include_usage":true},"tool_choice":{"type":"function","function":{"name":"ContextualRelevancyVerdicts"}},"tools":[{"type":"function","function":{"name":"ContextualRelevancyVerdicts","description":"","parameters":{"properties":{"verdicts":{"items":{"properties":{"statement":{"type":"string"},"verdict":{"type":"string"},"reason":{"anyOf":[{"type":"string"},{"type":"null"}],"default":null}},"required":["statement","verdict"],"type":"object"},"type":"array"}},"required":["verdicts"],"type":"object"}}}]}'
+    headers:
+      Content-Type:
+      - application/json
+      api-key:
+      - REDACTED
+      authorization:
+      - REDACTED
+      host:
+      - dial.test.example.com
+    method: POST
+    uri: https://dial.test.example.com/openai/deployments/gemini-2.5-flash-lite/chat/completions?api-version=2023-12-01-preview
+  response:
+    body:
+      string: 'data: {"choices":[{"index":0,"finish_reason":null,"delta":{"role":"assistant"}}],"usage":null,"id":"8978c858-3703-4b7b-b858-723845534c7b","created":1775479523,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":null,"tool_calls":[{"index":0,"id":"ContextualRelevancyVerdicts_1","type":"function","function":{"name":"ContextualRelevancyVerdicts","arguments":"{\"verdicts\":
+        [{\"verdict\": \"no\", \"statement\": \"The Earth is the third planet from
+        the Sun.\", \"reason\": \"The retrieval context contained the information
+        ''The Earth is the third planet from the Sun'' when the user asked for the
+        Earth''s diameter.\"}]}"}}]}}],"usage":null,"id":"8978c858-3703-4b7b-b858-723845534c7b","created":1775479523,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":""}}],"usage":null,"id":"8978c858-3703-4b7b-b858-723845534c7b","created":1775479523,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":"tool_calls","delta":{}}],"usage":{"prompt_tokens":427,"completion_tokens":52,"total_tokens":479},"id":"8978c858-3703-4b7b-b858-723845534c7b","created":1775479523,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: [DONE]
+
+
+        '
+    headers:
+      Content-Type:
+      - text/event-stream; charset=utf-8
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"messages":[{"content":"Based on the input and context, please generate
+      a JSON object to indicate whether each statement found in the context is relevant
+      to the provided input. The JSON will be a list of ''verdicts'', with 2 mandatory
+      fields: ''verdict'' and ''statement'', and 1 optional field: ''reason''.\n            You
+      should first extract statements found in the context, which are high level information
+      found in the context, before deciding on a verdict and optionally a reason for
+      each statement.\n            The ''verdict'' key should STRICTLY be either ''yes''
+      or ''no'', and states whether the statement is relevant to the input.\n            Provide
+      a ''reason'' ONLY IF verdict is no. You MUST quote the irrelevant parts of the
+      statement to back up your reason.\nIf provided context contains no actual content
+      or statements then: give \"no\" as a \"verdict\",\nput context into \"statement\",
+      and \"No statements found in provided context.\" into \"reason\".\n            **\n            IMPORTANT:
+      Please make sure to only return in JSON format.\n            Example Context:
+      \"Einstein won the Nobel Prize for his discovery of the photoelectric effect.
+      He won the Nobel Prize in 1968. There was a cat.\"\n            Example Input:
+      \"What were some of Einstein''s achievements?\"\n\n            Example:\n            {\n                \"verdicts\":
+      [\n                    {\n                        \"statement\": \"Einstein
+      won the Nobel Prize for his discovery of the photoelectric effect in 1968\",\n                        \"verdict\":
+      \"yes\"\n                    },\n                    {\n                        \"statement\":
+      \"There was a cat.\",\n                        \"reason\": \"The retrieval context
+      contained the information ''There was a cat'' when it has nothing to do with
+      Einstein''s achievements.\",\n                        \"verdict\": \"no\"\n                    }\n                ]\n            }\n            **\n\n            Input:\n            What
+      is the diameter of the Earth?\n\n            Context:\n            The Earth
+      has a diameter of approximately 12,742 kilometers.\n\n            JSON:\n","role":"user"}],"model":null,"stream":true,"stream_options":{"include_usage":true},"tool_choice":{"type":"function","function":{"name":"ContextualRelevancyVerdicts"}},"tools":[{"type":"function","function":{"name":"ContextualRelevancyVerdicts","description":"","parameters":{"properties":{"verdicts":{"items":{"properties":{"statement":{"type":"string"},"verdict":{"type":"string"},"reason":{"anyOf":[{"type":"string"},{"type":"null"}],"default":null}},"required":["statement","verdict"],"type":"object"},"type":"array"}},"required":["verdicts"],"type":"object"}}}]}'
+    headers:
+      Content-Type:
+      - application/json
+      api-key:
+      - REDACTED
+      authorization:
+      - REDACTED
+      host:
+      - dial.test.example.com
+    method: POST
+    uri: https://dial.test.example.com/openai/deployments/gemini-2.5-flash-lite/chat/completions?api-version=2023-12-01-preview
+  response:
+    body:
+      string: 'data: {"choices":[{"index":0,"finish_reason":null,"delta":{"role":"assistant"}}],"usage":null,"id":"afd8c16c-e5f6-42cb-8557-05bb6ea34905","created":1775479523,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":null,"tool_calls":[{"index":0,"id":"ContextualRelevancyVerdicts_1","type":"function","function":{"name":"ContextualRelevancyVerdicts","arguments":"{\"verdicts\":
+        [{\"verdict\": \"yes\", \"statement\": \"The Earth has a diameter of approximately
+        12,742 kilometers.\"}]}"}}]}}],"usage":null,"id":"afd8c16c-e5f6-42cb-8557-05bb6ea34905","created":1775479523,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":""}}],"usage":null,"id":"afd8c16c-e5f6-42cb-8557-05bb6ea34905","created":1775479523,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":"tool_calls","delta":{}}],"usage":{"prompt_tokens":433,"completion_tokens":29,"total_tokens":462},"id":"afd8c16c-e5f6-42cb-8557-05bb6ea34905","created":1775479523,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: [DONE]
+
+
+        '
+    headers:
+      Content-Type:
+      - text/event-stream; charset=utf-8
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"messages":[{"content":"Based on the given input, reasons for why the
+      retrieval context is irrelevant to the input, the statements in the retrieval
+      context that is actually relevant to the retrieval context, and the contextual
+      relevancy score (the closer to 1 the better), please generate a CONCISE reason
+      for the score.\n            In your reason, you should quote data provided in
+      the reasons for irrelevancy and relevant statements to support your point.\n\n            **
+      \n            IMPORTANT: Please make sure to only return in JSON format, with
+      the ''reason'' key providing the reason.\n            Example JSON:\n            {\n                \"reason\":
+      \"The score is <contextual_relevancy_score> because <your_reason>.\"\n            }\n\n            If
+      the score is 1, keep it short and say something positive with an upbeat encouraging
+      tone (but don''t overdo it otherwise it gets annoying).\n            **\n\n\n            Contextual
+      Relevancy Score:\n            0.50\n\n            Input:\n            What is
+      the diameter of the Earth?\n\n            Reasons for why the retrieval context
+      is irrelevant to the input:\n            [\"The retrieval context contained
+      the information ''The Earth is the third planet from the Sun'' when the user
+      asked for the Earth''s diameter.\"]\n\n            Statement in the retrieval
+      context that is relevant to the input:\n            [''The Earth has a diameter
+      of approximately 12,742 kilometers.'']\n\n            JSON:\n","role":"user"}],"model":null,"stream":true,"stream_options":{"include_usage":true},"tool_choice":{"type":"function","function":{"name":"ContextualRelevancyScoreReason"}},"tools":[{"type":"function","function":{"name":"ContextualRelevancyScoreReason","description":"","parameters":{"properties":{"reason":{"type":"string"}},"required":["reason"],"type":"object"}}}]}'
+    headers:
+      Content-Type:
+      - application/json
+      api-key:
+      - REDACTED
+      authorization:
+      - REDACTED
+      host:
+      - dial.test.example.com
+    method: POST
+    uri: https://dial.test.example.com/openai/deployments/gemini-2.5-flash-lite/chat/completions?api-version=2023-12-01-preview
+  response:
+    body:
+      string: 'data: {"choices":[{"index":0,"finish_reason":null,"delta":{"role":"assistant"}}],"usage":null,"id":"c4f85fa2-450d-403f-b6c6-dae6bf0ced3d","created":1775479524,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":null,"tool_calls":[{"index":0,"id":"ContextualRelevancyScoreReason_1","type":"function","function":{"name":"ContextualRelevancyScoreReason","arguments":"{\"reason\":
+        \"The score is 0.50 because while the retrieval context did mention that \\\"The
+        Earth has a diameter of approximately 12,742 kilometers,\\\" it also included
+        irrelevant information such as \\\"The Earth is the third planet from the
+        Sun,\\\" which does not answer the user''s question about the Earth''s diameter.\"}"}}]}}],"usage":null,"id":"c4f85fa2-450d-403f-b6c6-dae6bf0ced3d","created":1775479524,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":""}}],"usage":null,"id":"c4f85fa2-450d-403f-b6c6-dae6bf0ced3d","created":1775479524,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":"tool_calls","delta":{}}],"usage":{"prompt_tokens":306,"completion_tokens":75,"total_tokens":381},"id":"c4f85fa2-450d-403f-b6c6-dae6bf0ced3d","created":1775479524,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: [DONE]
+
+
+        '
+    headers:
+      Content-Type:
+      - text/event-stream; charset=utf-8
+    status:
+      code: 200
+      message: OK
+version: 1

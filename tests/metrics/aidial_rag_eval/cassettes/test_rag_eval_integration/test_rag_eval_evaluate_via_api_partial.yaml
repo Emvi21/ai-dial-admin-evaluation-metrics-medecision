@@ -1,0 +1,984 @@
+interactions:
+- request:
+    body: '{"messages":[{"content":"\nThe task is to replace all pronouns in a segments
+      with their corresponding nouns or proper names when their referents are known.\nYou
+      will receive segments.\nIf a segment is nonsensical, a reference, link, or meaningless,
+      return it unchanged.\nIf unsure what to do with segment, return the original
+      segment.\nOnly perform the task; do not shorten, simplify, or correct errors.\nDo
+      not provide explanations.\n\nFor example: \"My mom is a good person.\", \"She
+      always takes care of me.\" you must return:\n```json\n{\n    \"segments\": [\n        \"My
+      mom is a good person.\",\n        \"My mom always takes care of me.\",\n        ...\n    ]\n}\n```\n\nYour
+      response template:\n```json\n{\n    \"segments\": [\n        << Segment 1 >>,\n        <<
+      Segment 2 >>,\n        ...\n    ]\n}\n```\nList of input segments:\n```json\n{\n    \"segments\":
+      [\"Earth has a diameter of about 12,742 km.\", \"It is a third planet.\", \"And
+      it has a single moon.\"]\n}\n```\nImportant: before generating response, check
+      the number and structure of segments. The response must have the same number
+      of segments, split the same way.","role":"user"}],"model":null,"stream":true,"stream_options":{"include_usage":true}}'
+    headers:
+      Content-Type:
+      - application/json
+      api-key:
+      - REDACTED
+      authorization:
+      - REDACTED
+      host:
+      - dial.test.example.com
+    method: POST
+    uri: https://dial.test.example.com/openai/deployments/gemini-2.5-flash-lite/chat/completions?api-version=2023-12-01-preview
+  response:
+    body:
+      string: 'data: {"choices":[{"index":0,"finish_reason":null,"delta":{"role":"assistant"}}],"usage":null,"id":"59c5087e-025a-4d27-91f7-9656d5c76356","created":1775479188,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"```"}}],"usage":null,"id":"59c5087e-025a-4d27-91f7-9656d5c76356","created":1775479188,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"json\n{\n    "}}],"usage":null,"id":"59c5087e-025a-4d27-91f7-9656d5c76356","created":1775479188,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"\"segments\":
+        [\"Earth has a diameter of about 12,74"}}],"usage":null,"id":"59c5087e-025a-4d27-91f7-9656d5c76356","created":1775479188,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"2 km.\",
+        \"Earth is a third planet.\", \"And Earth has a single moon.\"]"}}],"usage":null,"id":"59c5087e-025a-4d27-91f7-9656d5c76356","created":1775479188,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"\n}\n```"}}],"usage":null,"id":"59c5087e-025a-4d27-91f7-9656d5c76356","created":1775479188,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":""}}],"usage":null,"id":"59c5087e-025a-4d27-91f7-9656d5c76356","created":1775479188,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":"stop","delta":{}}],"usage":{"prompt_tokens":276,"completion_tokens":44,"total_tokens":320},"id":"59c5087e-025a-4d27-91f7-9656d5c76356","created":1775479188,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: [DONE]
+
+
+        '
+    headers:
+      Content-Type:
+      - text/event-stream; charset=utf-8
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"messages":[{"content":"\nBreak down each hypothesis into statements,
+      if hypothesis is complex. Else return hypothesis as a single statement.\n\nA
+      statement is a declarative independent self-contained non-overlapping substring
+      forming a complete sentence derived from the hypothesis.\n\nSingle words, signs,
+      numbers, links, etc. are not statements.\n\nYour response must be in JSON format:\n```json\n{\n    \"hypothesis_statements\":
+      [\n        {\n            \"statements\": [\n                <<statement1 from
+      the first hypothesis>>,\n                <<statement2 from the first hypothesis>>,\n                ...\n            ]\n        },\n        {\n            \"statements\":
+      [\n                <<statement1 from the second hypothesis>>,\n                <<statement2
+      from the second hypothesis>>,\n                ...\n            ]\n        },\n        ...\n    ]\n}\n```\n\nRequest:\nHypotheses:\n\n<hypothesis1>
+      Earth has a diameter of about 12,742 km. </hypothesis1>\n\n<hypothesis2> Earth
+      is a third planet. </hypothesis2>\n\n<hypothesis3> And Earth has a single moon.
+      </hypothesis3>\n","role":"user"}],"model":null,"stream":true,"stream_options":{"include_usage":true}}'
+    headers:
+      Content-Type:
+      - application/json
+      api-key:
+      - REDACTED
+      authorization:
+      - REDACTED
+      host:
+      - dial.test.example.com
+    method: POST
+    uri: https://dial.test.example.com/openai/deployments/gemini-2.5-flash-lite/chat/completions?api-version=2023-12-01-preview
+  response:
+    body:
+      string: 'data: {"choices":[{"index":0,"finish_reason":null,"delta":{"role":"assistant"}}],"usage":null,"id":"363c8b7f-f528-48fc-b099-0a5b73f6d8db","created":1775479189,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"```"}}],"usage":null,"id":"363c8b7f-f528-48fc-b099-0a5b73f6d8db","created":1775479189,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"json\n{\n    "}}],"usage":null,"id":"363c8b7f-f528-48fc-b099-0a5b73f6d8db","created":1775479189,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"\"hypothesis_statements\":
+        [\n        {\n            \"statements\": [\n                "}}],"usage":null,"id":"363c8b7f-f528-48fc-b099-0a5b73f6d8db","created":1775479189,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"\"Earth
+        has a diameter of about 12,742 km.\"\n            "}}],"usage":null,"id":"363c8b7f-f528-48fc-b099-0a5b73f6d8db","created":1775479189,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"]\n        },\n        {\n            \"statements\":
+        [\n                \"Earth is a third planet.\"\n            ]\n        },\n        {\n            \"statements\":"}}],"usage":null,"id":"363c8b7f-f528-48fc-b099-0a5b73f6d8db","created":1775479189,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":" [\n                \"Earth
+        has a single moon.\"\n            ]\n        }\n    ]\n}\n```"}}],"usage":null,"id":"363c8b7f-f528-48fc-b099-0a5b73f6d8db","created":1775479189,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":""}}],"usage":null,"id":"363c8b7f-f528-48fc-b099-0a5b73f6d8db","created":1775479189,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":"stop","delta":{}}],"usage":{"prompt_tokens":232,"completion_tokens":100,"total_tokens":332},"id":"363c8b7f-f528-48fc-b099-0a5b73f6d8db","created":1775479189,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: [DONE]
+
+
+        '
+    headers:
+      Content-Type:
+      - text/event-stream; charset=utf-8
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"messages":[{"content":"\nNatural language inference is the task of determining
+      whether the hypothesis is an entailment, contradiction, or neutral with respect
+      to the premise.\nA hypothesis is a list of statements provided below. \n\n\n\nA
+      statement is considered an entailment if it logically follows from the premise.\nA
+      statement is considered a contradiction if it is logically inconsistent with
+      the premise.\nElse a statement is considered a neutral.\nImportant: Don''t reject
+      entailment just because of minor extra details - if the main meaning holds,
+      it''s still entailment.\n\nFor each statement:\nProvide a brief short(1 sentences)
+      explanation of whether the statement is an entailment, contradiction or neutral
+      with respect to the premise.\nAssign tags based on your explanation: \"ENT\"
+      for entailment, \"CONT\" for contradiction, \"NEUT\" for neutral or if none
+      of the above tags apply.\n\nFormat your response in JSON. You must return only
+      JSON.\n\nFor example, if the premise is \"I am a biology graduate and I work
+      at a tech company.\" and the list of statements is [\"I am a graduate.\", \"I
+      work at a hospital.\"] your response should be:\n\n```json\n{\n    \"statement_inference\":
+      [\n        {\n            \"explanation\": \"It is true that I am a graduate\",\n            \"tag\":
+      \"ENT\"\n        },\n        {\n            \"explanation\": \"Premise states
+      I work at a tech company, not a hospital.\",\n            \"tag\": \"CONT\"\n        }\n    ]\n}\n```\n\nYour
+      response must be in JSON format:\n```json\n{\n    \"statement_inference\": [\n        {\n            \"explanation\":
+      <<explanation>>,\n            \"tag\": <<\"ENT\" or \"CONT\" or \"NEUT\">>\n        },\n        ...\n    ]\n}\n```\nRequest:\n\n\n<premise>\nWhat
+      is the diameter of Earth?\nThe diameter of the Earth is approximately 12,742
+      kilometers. The Earth has two moons.\n</premise>\n\nList of statements:\n\n<statement1>
+      Earth has a diameter of about 12,742 km. </statement1>\n","role":"user"}],"model":null,"stream":true,"stream_options":{"include_usage":true}}'
+    headers:
+      Content-Type:
+      - application/json
+      api-key:
+      - REDACTED
+      authorization:
+      - REDACTED
+      host:
+      - dial.test.example.com
+    method: POST
+    uri: https://dial.test.example.com/openai/deployments/gemini-2.5-flash-lite/chat/completions?api-version=2023-12-01-preview
+  response:
+    body:
+      string: 'data: {"choices":[{"index":0,"finish_reason":null,"delta":{"role":"assistant"}}],"usage":null,"id":"9c2a8fbb-107b-4587-90ba-0989bd13b0f3","created":1775479191,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"```"}}],"usage":null,"id":"9c2a8fbb-107b-4587-90ba-0989bd13b0f3","created":1775479191,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"json\n{\n    "}}],"usage":null,"id":"9c2a8fbb-107b-4587-90ba-0989bd13b0f3","created":1775479191,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"\"statement_inference\":
+        [\n        {\n            \"explanation\": \"The statement"}}],"usage":null,"id":"9c2a8fbb-107b-4587-90ba-0989bd13b0f3","created":1775479191,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":" directly
+        repeats information given in the premise about Earth''s diameter.\",\n            \"tag\":
+        \"ENT\""}}],"usage":null,"id":"9c2a8fbb-107b-4587-90ba-0989bd13b0f3","created":1775479191,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"\n        }\n    ]\n}\n```"}}],"usage":null,"id":"9c2a8fbb-107b-4587-90ba-0989bd13b0f3","created":1775479191,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":""}}],"usage":null,"id":"9c2a8fbb-107b-4587-90ba-0989bd13b0f3","created":1775479191,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":"stop","delta":{}}],"usage":{"prompt_tokens":457,"completion_tokens":54,"total_tokens":511},"id":"9c2a8fbb-107b-4587-90ba-0989bd13b0f3","created":1775479191,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: [DONE]
+
+
+        '
+    headers:
+      Content-Type:
+      - text/event-stream; charset=utf-8
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"messages":[{"content":"\nNatural language inference is the task of determining
+      whether the hypothesis is an entailment, contradiction, or neutral with respect
+      to the premise.\nA hypothesis is a list of statements provided below. \n\n\n\nA
+      statement is considered an entailment if it logically follows from the premise.\nA
+      statement is considered a contradiction if it is logically inconsistent with
+      the premise.\nElse a statement is considered a neutral.\nImportant: Don''t reject
+      entailment just because of minor extra details - if the main meaning holds,
+      it''s still entailment.\n\nFor each statement:\nProvide a brief short(1 sentences)
+      explanation of whether the statement is an entailment, contradiction or neutral
+      with respect to the premise.\nAssign tags based on your explanation: \"ENT\"
+      for entailment, \"CONT\" for contradiction, \"NEUT\" for neutral or if none
+      of the above tags apply.\n\nFormat your response in JSON. You must return only
+      JSON.\n\nFor example, if the premise is \"I am a biology graduate and I work
+      at a tech company.\" and the list of statements is [\"I am a graduate.\", \"I
+      work at a hospital.\"] your response should be:\n\n```json\n{\n    \"statement_inference\":
+      [\n        {\n            \"explanation\": \"It is true that I am a graduate\",\n            \"tag\":
+      \"ENT\"\n        },\n        {\n            \"explanation\": \"Premise states
+      I work at a tech company, not a hospital.\",\n            \"tag\": \"CONT\"\n        }\n    ]\n}\n```\n\nYour
+      response must be in JSON format:\n```json\n{\n    \"statement_inference\": [\n        {\n            \"explanation\":
+      <<explanation>>,\n            \"tag\": <<\"ENT\" or \"CONT\" or \"NEUT\">>\n        },\n        ...\n    ]\n}\n```\nRequest:\n\n\n<premise>\nWhat
+      is the diameter of Earth?\nThe diameter of the Earth is approximately 12,742
+      kilometers. The Earth has two moons.\n</premise>\n\nList of statements:\n\n<statement1>
+      Earth is a third planet. </statement1>\n","role":"user"}],"model":null,"stream":true,"stream_options":{"include_usage":true}}'
+    headers:
+      Content-Type:
+      - application/json
+      api-key:
+      - REDACTED
+      authorization:
+      - REDACTED
+      host:
+      - dial.test.example.com
+    method: POST
+    uri: https://dial.test.example.com/openai/deployments/gemini-2.5-flash-lite/chat/completions?api-version=2023-12-01-preview
+  response:
+    body:
+      string: 'data: {"choices":[{"index":0,"finish_reason":null,"delta":{"role":"assistant"}}],"usage":null,"id":"b4dbd30e-e260-46e6-a900-b960fae1bcbe","created":1775479191,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"```"}}],"usage":null,"id":"b4dbd30e-e260-46e6-a900-b960fae1bcbe","created":1775479191,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"json\n{\n    "}}],"usage":null,"id":"b4dbd30e-e260-46e6-a900-b960fae1bcbe","created":1775479191,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"\"statement_inference\":
+        [\n        {\n            \"explanation\": \"The premise"}}],"usage":null,"id":"b4dbd30e-e260-46e6-a900-b960fae1bcbe","created":1775479191,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":" does
+        not provide information about the Earth''s position in relation to other planets,
+        making"}}],"usage":null,"id":"b4dbd30e-e260-46e6-a900-b960fae1bcbe","created":1775479191,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":" this
+        statement neutral.\",\n            \"tag\": \"NEUT\"\n        }\n    ]\n}\n```"}}],"usage":null,"id":"b4dbd30e-e260-46e6-a900-b960fae1bcbe","created":1775479191,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":""}}],"usage":null,"id":"b4dbd30e-e260-46e6-a900-b960fae1bcbe","created":1775479191,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":"stop","delta":{}}],"usage":{"prompt_tokens":448,"completion_tokens":63,"total_tokens":511},"id":"b4dbd30e-e260-46e6-a900-b960fae1bcbe","created":1775479191,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: [DONE]
+
+
+        '
+    headers:
+      Content-Type:
+      - text/event-stream; charset=utf-8
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"messages":[{"content":"\nNatural language inference is the task of determining
+      whether the hypothesis is an entailment, contradiction, or neutral with respect
+      to the premise.\nA hypothesis is a list of statements provided below. \n\n\n\nA
+      statement is considered an entailment if it logically follows from the premise.\nA
+      statement is considered a contradiction if it is logically inconsistent with
+      the premise.\nElse a statement is considered a neutral.\nImportant: Don''t reject
+      entailment just because of minor extra details - if the main meaning holds,
+      it''s still entailment.\n\nFor each statement:\nProvide a brief short(1 sentences)
+      explanation of whether the statement is an entailment, contradiction or neutral
+      with respect to the premise.\nAssign tags based on your explanation: \"ENT\"
+      for entailment, \"CONT\" for contradiction, \"NEUT\" for neutral or if none
+      of the above tags apply.\n\nFormat your response in JSON. You must return only
+      JSON.\n\nFor example, if the premise is \"I am a biology graduate and I work
+      at a tech company.\" and the list of statements is [\"I am a graduate.\", \"I
+      work at a hospital.\"] your response should be:\n\n```json\n{\n    \"statement_inference\":
+      [\n        {\n            \"explanation\": \"It is true that I am a graduate\",\n            \"tag\":
+      \"ENT\"\n        },\n        {\n            \"explanation\": \"Premise states
+      I work at a tech company, not a hospital.\",\n            \"tag\": \"CONT\"\n        }\n    ]\n}\n```\n\nYour
+      response must be in JSON format:\n```json\n{\n    \"statement_inference\": [\n        {\n            \"explanation\":
+      <<explanation>>,\n            \"tag\": <<\"ENT\" or \"CONT\" or \"NEUT\">>\n        },\n        ...\n    ]\n}\n```\nRequest:\n\n\n<premise>\nWhat
+      is the diameter of Earth?\nThe diameter of the Earth is approximately 12,742
+      kilometers. The Earth has two moons.\n</premise>\n\nList of statements:\n\n<statement1>
+      Earth has a single moon. </statement1>\n","role":"user"}],"model":null,"stream":true,"stream_options":{"include_usage":true}}'
+    headers:
+      Content-Type:
+      - application/json
+      api-key:
+      - REDACTED
+      authorization:
+      - REDACTED
+      host:
+      - dial.test.example.com
+    method: POST
+    uri: https://dial.test.example.com/openai/deployments/gemini-2.5-flash-lite/chat/completions?api-version=2023-12-01-preview
+  response:
+    body:
+      string: 'data: {"choices":[{"index":0,"finish_reason":null,"delta":{"role":"assistant"}}],"usage":null,"id":"837826f9-498d-4ba2-94ae-7cbba821a2c8","created":1775479191,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"```"}}],"usage":null,"id":"837826f9-498d-4ba2-94ae-7cbba821a2c8","created":1775479191,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"json\n{"}}],"usage":null,"id":"837826f9-498d-4ba2-94ae-7cbba821a2c8","created":1775479191,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"\n    \"statement_inference\":
+        [\n        {\n            \"explanation\":"}}],"usage":null,"id":"837826f9-498d-4ba2-94ae-7cbba821a2c8","created":1775479191,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":" \"The
+        premise states that the Earth has two moons, which contradicts the statement
+        that"}}],"usage":null,"id":"837826f9-498d-4ba2-94ae-7cbba821a2c8","created":1775479191,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":" it
+        has a single moon.\",\n            \"tag\": \"CONT\"\n        }\n    ]\n}\n```"}}],"usage":null,"id":"837826f9-498d-4ba2-94ae-7cbba821a2c8","created":1775479191,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":""}}],"usage":null,"id":"837826f9-498d-4ba2-94ae-7cbba821a2c8","created":1775479191,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":"stop","delta":{}}],"usage":{"prompt_tokens":448,"completion_tokens":60,"total_tokens":508},"id":"837826f9-498d-4ba2-94ae-7cbba821a2c8","created":1775479191,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: [DONE]
+
+
+        '
+    headers:
+      Content-Type:
+      - text/event-stream; charset=utf-8
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"messages":[{"content":"\nThe task is to replace all pronouns in a segments
+      with their corresponding nouns or proper names when their referents are known.\nYou
+      will receive segments.\nIf a segment is nonsensical, a reference, link, or meaningless,
+      return it unchanged.\nIf unsure what to do with segment, return the original
+      segment.\nOnly perform the task; do not shorten, simplify, or correct errors.\nDo
+      not provide explanations.\n\nFor example: \"My mom is a good person.\", \"She
+      always takes care of me.\" you must return:\n```json\n{\n    \"segments\": [\n        \"My
+      mom is a good person.\",\n        \"My mom always takes care of me.\",\n        ...\n    ]\n}\n```\n\nYour
+      response template:\n```json\n{\n    \"segments\": [\n        << Segment 1 >>,\n        <<
+      Segment 2 >>,\n        ...\n    ]\n}\n```\nList of input segments:\n```json\n{\n    \"segments\":
+      [\"The diameter of the Earth is approximately 12,742 kilometers.\", \"The Earth
+      has two moons.\"]\n}\n```\nImportant: before generating response, check the
+      number and structure of segments. The response must have the same number of
+      segments, split the same way.","role":"user"}],"model":null,"stream":true,"stream_options":{"include_usage":true}}'
+    headers:
+      Content-Type:
+      - application/json
+      api-key:
+      - REDACTED
+      authorization:
+      - REDACTED
+      host:
+      - dial.test.example.com
+    method: POST
+    uri: https://dial.test.example.com/openai/deployments/gemini-2.5-flash-lite/chat/completions?api-version=2023-12-01-preview
+  response:
+    body:
+      string: 'data: {"choices":[{"index":0,"finish_reason":null,"delta":{"role":"assistant"}}],"usage":null,"id":"5ac2bc22-18ec-4637-ac50-2bd506c98895","created":1775479192,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"```"}}],"usage":null,"id":"5ac2bc22-18ec-4637-ac50-2bd506c98895","created":1775479192,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"json\n{\n    "}}],"usage":null,"id":"5ac2bc22-18ec-4637-ac50-2bd506c98895","created":1775479192,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"\"segments\":
+        [\"The diameter of the Earth is approximately 12,7"}}],"usage":null,"id":"5ac2bc22-18ec-4637-ac50-2bd506c98895","created":1775479192,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"42 kilometers.\",
+        \"The Earth has two moons.\"]\n}\n```"}}],"usage":null,"id":"5ac2bc22-18ec-4637-ac50-2bd506c98895","created":1775479192,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":""}}],"usage":null,"id":"5ac2bc22-18ec-4637-ac50-2bd506c98895","created":1775479192,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":"stop","delta":{}}],"usage":{"prompt_tokens":269,"completion_tokens":37,"total_tokens":306},"id":"5ac2bc22-18ec-4637-ac50-2bd506c98895","created":1775479192,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: [DONE]
+
+
+        '
+    headers:
+      Content-Type:
+      - text/event-stream; charset=utf-8
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"messages":[{"content":"\nBreak down each hypothesis into statements,
+      if hypothesis is complex. Else return hypothesis as a single statement.\n\nA
+      statement is a declarative independent self-contained non-overlapping substring
+      forming a complete sentence derived from the hypothesis.\n\nSingle words, signs,
+      numbers, links, etc. are not statements.\n\nYour response must be in JSON format:\n```json\n{\n    \"hypothesis_statements\":
+      [\n        {\n            \"statements\": [\n                <<statement1 from
+      the first hypothesis>>,\n                <<statement2 from the first hypothesis>>,\n                ...\n            ]\n        },\n        {\n            \"statements\":
+      [\n                <<statement1 from the second hypothesis>>,\n                <<statement2
+      from the second hypothesis>>,\n                ...\n            ]\n        },\n        ...\n    ]\n}\n```\n\nRequest:\nHypotheses:\n\n<hypothesis1>
+      The diameter of the Earth is approximately 12,742 kilometers. </hypothesis1>\n\n<hypothesis2>
+      The Earth has two moons. </hypothesis2>\n","role":"user"}],"model":null,"stream":true,"stream_options":{"include_usage":true}}'
+    headers:
+      Content-Type:
+      - application/json
+      api-key:
+      - REDACTED
+      authorization:
+      - REDACTED
+      host:
+      - dial.test.example.com
+    method: POST
+    uri: https://dial.test.example.com/openai/deployments/gemini-2.5-flash-lite/chat/completions?api-version=2023-12-01-preview
+  response:
+    body:
+      string: 'data: {"choices":[{"index":0,"finish_reason":null,"delta":{"role":"assistant"}}],"usage":null,"id":"1ff9c383-91d2-4dd2-a7fe-23f0e4e4da4c","created":1775479194,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"```"}}],"usage":null,"id":"1ff9c383-91d2-4dd2-a7fe-23f0e4e4da4c","created":1775479194,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"json\n{"}}],"usage":null,"id":"1ff9c383-91d2-4dd2-a7fe-23f0e4e4da4c","created":1775479194,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"\n    \"hypothesis_statements\":
+        [\n        {\n            \"statements\":"}}],"usage":null,"id":"1ff9c383-91d2-4dd2-a7fe-23f0e4e4da4c","created":1775479194,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":" [\n                \"The
+        diameter of the Earth is approximately 12,7"}}],"usage":null,"id":"1ff9c383-91d2-4dd2-a7fe-23f0e4e4da4c","created":1775479194,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"42 kilometers.\"\n            ]\n        },\n        {\n            \"statements\":
+        [\n                \"The Earth has two moons.\"\n            ]\n"}}],"usage":null,"id":"1ff9c383-91d2-4dd2-a7fe-23f0e4e4da4c","created":1775479194,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"        }\n    ]\n}\n```"}}],"usage":null,"id":"1ff9c383-91d2-4dd2-a7fe-23f0e4e4da4c","created":1775479194,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":""}}],"usage":null,"id":"1ff9c383-91d2-4dd2-a7fe-23f0e4e4da4c","created":1775479194,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":"stop","delta":{}}],"usage":{"prompt_tokens":217,"completion_tokens":77,"total_tokens":294},"id":"1ff9c383-91d2-4dd2-a7fe-23f0e4e4da4c","created":1775479194,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: [DONE]
+
+
+        '
+    headers:
+      Content-Type:
+      - text/event-stream; charset=utf-8
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"messages":[{"content":"\nNatural language inference is the task of determining
+      whether the hypothesis is an entailment, contradiction, or neutral with respect
+      to the premise.\nA hypothesis is a list of statements provided below. \n\n\n\nA
+      statement is considered an entailment if it logically follows from the premise.\nA
+      statement is considered a contradiction if it is logically inconsistent with
+      the premise.\nElse a statement is considered a neutral.\nImportant: Don''t reject
+      entailment just because of minor extra details - if the main meaning holds,
+      it''s still entailment.\n\nFor each statement:\nProvide a brief short(1 sentences)
+      explanation of whether the statement is an entailment, contradiction or neutral
+      with respect to the premise.\nAssign tags based on your explanation: \"ENT\"
+      for entailment, \"CONT\" for contradiction, \"NEUT\" for neutral or if none
+      of the above tags apply.\n\nFormat your response in JSON. You must return only
+      JSON.\n\nFor example, if the premise is \"I am a biology graduate and I work
+      at a tech company.\" and the list of statements is [\"I am a graduate.\", \"I
+      work at a hospital.\"] your response should be:\n\n```json\n{\n    \"statement_inference\":
+      [\n        {\n            \"explanation\": \"It is true that I am a graduate\",\n            \"tag\":
+      \"ENT\"\n        },\n        {\n            \"explanation\": \"Premise states
+      I work at a tech company, not a hospital.\",\n            \"tag\": \"CONT\"\n        }\n    ]\n}\n```\n\nYour
+      response must be in JSON format:\n```json\n{\n    \"statement_inference\": [\n        {\n            \"explanation\":
+      <<explanation>>,\n            \"tag\": <<\"ENT\" or \"CONT\" or \"NEUT\">>\n        },\n        ...\n    ]\n}\n```\nRequest:\n\n\n<premise>\nWhat
+      is the diameter of Earth?\nEarth has a diameter of about 12,742 km. It is a
+      third planet. And it has a single moon.\n</premise>\n\nList of statements:\n\n<statement1>
+      The Earth has two moons. </statement1>\n","role":"user"}],"model":null,"stream":true,"stream_options":{"include_usage":true}}'
+    headers:
+      Content-Type:
+      - application/json
+      api-key:
+      - REDACTED
+      authorization:
+      - REDACTED
+      host:
+      - dial.test.example.com
+    method: POST
+    uri: https://dial.test.example.com/openai/deployments/gemini-2.5-flash-lite/chat/completions?api-version=2023-12-01-preview
+  response:
+    body:
+      string: 'data: {"choices":[{"index":0,"finish_reason":null,"delta":{"role":"assistant"}}],"usage":null,"id":"884de4a7-c069-4852-929e-73108fffc6d2","created":1775479196,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"```"}}],"usage":null,"id":"884de4a7-c069-4852-929e-73108fffc6d2","created":1775479196,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"json\n{\n    "}}],"usage":null,"id":"884de4a7-c069-4852-929e-73108fffc6d2","created":1775479196,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"\"statement_inference\":
+        [\n        {\n            \"explanation\": \"The premise"}}],"usage":null,"id":"884de4a7-c069-4852-929e-73108fffc6d2","created":1775479196,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":" states
+        Earth has a single moon, making the statement that it has two moons a"}}],"usage":null,"id":"884de4a7-c069-4852-929e-73108fffc6d2","created":1775479196,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":" contradiction.\",\n            \"tag\":
+        \"CONT\"\n        }\n    ]\n}\n```"}}],"usage":null,"id":"884de4a7-c069-4852-929e-73108fffc6d2","created":1775479196,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":""}}],"usage":null,"id":"884de4a7-c069-4852-929e-73108fffc6d2","created":1775479196,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":"stop","delta":{}}],"usage":{"prompt_tokens":454,"completion_tokens":59,"total_tokens":513},"id":"884de4a7-c069-4852-929e-73108fffc6d2","created":1775479196,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: [DONE]
+
+
+        '
+    headers:
+      Content-Type:
+      - text/event-stream; charset=utf-8
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"messages":[{"content":"\nNatural language inference is the task of determining
+      whether the hypothesis is an entailment, contradiction, or neutral with respect
+      to the premise.\nA hypothesis is a list of statements provided below. \n\n\n\nA
+      statement is considered an entailment if it logically follows from the premise.\nA
+      statement is considered a contradiction if it is logically inconsistent with
+      the premise.\nElse a statement is considered a neutral.\nImportant: Don''t reject
+      entailment just because of minor extra details - if the main meaning holds,
+      it''s still entailment.\n\nFor each statement:\nProvide a brief short(1 sentences)
+      explanation of whether the statement is an entailment, contradiction or neutral
+      with respect to the premise.\nAssign tags based on your explanation: \"ENT\"
+      for entailment, \"CONT\" for contradiction, \"NEUT\" for neutral or if none
+      of the above tags apply.\n\nFormat your response in JSON. You must return only
+      JSON.\n\nFor example, if the premise is \"I am a biology graduate and I work
+      at a tech company.\" and the list of statements is [\"I am a graduate.\", \"I
+      work at a hospital.\"] your response should be:\n\n```json\n{\n    \"statement_inference\":
+      [\n        {\n            \"explanation\": \"It is true that I am a graduate\",\n            \"tag\":
+      \"ENT\"\n        },\n        {\n            \"explanation\": \"Premise states
+      I work at a tech company, not a hospital.\",\n            \"tag\": \"CONT\"\n        }\n    ]\n}\n```\n\nYour
+      response must be in JSON format:\n```json\n{\n    \"statement_inference\": [\n        {\n            \"explanation\":
+      <<explanation>>,\n            \"tag\": <<\"ENT\" or \"CONT\" or \"NEUT\">>\n        },\n        ...\n    ]\n}\n```\nRequest:\n\n\n<premise>\nWhat
+      is the diameter of Earth?\nEarth has a diameter of about 12,742 km. It is a
+      third planet. And it has a single moon.\n</premise>\n\nList of statements:\n\n<statement1>
+      The diameter of the Earth is approximately 12,742 kilometers. </statement1>\n","role":"user"}],"model":null,"stream":true,"stream_options":{"include_usage":true}}'
+    headers:
+      Content-Type:
+      - application/json
+      api-key:
+      - REDACTED
+      authorization:
+      - REDACTED
+      host:
+      - dial.test.example.com
+    method: POST
+    uri: https://dial.test.example.com/openai/deployments/gemini-2.5-flash-lite/chat/completions?api-version=2023-12-01-preview
+  response:
+    body:
+      string: 'data: {"choices":[{"index":0,"finish_reason":null,"delta":{"role":"assistant"}}],"usage":null,"id":"12a51b98-2dec-4500-8de3-014ddbd2fe2a","created":1775479196,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"```"}}],"usage":null,"id":"12a51b98-2dec-4500-8de3-014ddbd2fe2a","created":1775479196,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"json\n{\n    "}}],"usage":null,"id":"12a51b98-2dec-4500-8de3-014ddbd2fe2a","created":1775479196,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"\"statement_inference\":
+        [\n        {\n            \"explanation\": \"The statement"}}],"usage":null,"id":"12a51b98-2dec-4500-8de3-014ddbd2fe2a","created":1775479196,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":" directly
+        confirms the diameter of the Earth as provided in the premise.\",\n            \"tag\":
+        \"ENT\""}}],"usage":null,"id":"12a51b98-2dec-4500-8de3-014ddbd2fe2a","created":1775479196,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"\n        }\n    ]\n}\n```"}}],"usage":null,"id":"12a51b98-2dec-4500-8de3-014ddbd2fe2a","created":1775479196,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":""}}],"usage":null,"id":"12a51b98-2dec-4500-8de3-014ddbd2fe2a","created":1775479196,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":"stop","delta":{}}],"usage":{"prompt_tokens":464,"completion_tokens":54,"total_tokens":518},"id":"12a51b98-2dec-4500-8de3-014ddbd2fe2a","created":1775479196,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: [DONE]
+
+
+        '
+    headers:
+      Content-Type:
+      - text/event-stream; charset=utf-8
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"messages":[{"content":"\nThe task is to replace all pronouns in a segments
+      with their corresponding nouns or proper names when their referents are known.\nYou
+      will receive segments.\nIf a segment is nonsensical, a reference, link, or meaningless,
+      return it unchanged.\nIf unsure what to do with segment, return the original
+      segment.\nOnly perform the task; do not shorten, simplify, or correct errors.\nDo
+      not provide explanations.\n\nFor example: \"My mom is a good person.\", \"She
+      always takes care of me.\" you must return:\n```json\n{\n    \"segments\": [\n        \"My
+      mom is a good person.\",\n        \"My mom always takes care of me.\",\n        ...\n    ]\n}\n```\n\nYour
+      response template:\n```json\n{\n    \"segments\": [\n        << Segment 1 >>,\n        <<
+      Segment 2 >>,\n        ...\n    ]\n}\n```\nList of input segments:\n```json\n{\n    \"segments\":
+      [\"Earth has a diameter of about 12,742 km.\", \"It is a third planet.\", \"And
+      it has a single moon.\"]\n}\n```\nImportant: before generating response, check
+      the number and structure of segments. The response must have the same number
+      of segments, split the same way.","role":"user"}],"model":null,"stream":true,"stream_options":{"include_usage":true}}'
+    headers:
+      Content-Type:
+      - application/json
+      api-key:
+      - REDACTED
+      authorization:
+      - REDACTED
+      host:
+      - dial.test.example.com
+    method: POST
+    uri: https://dial.test.example.com/openai/deployments/gemini-2.5-flash-lite/chat/completions?api-version=2023-12-01-preview
+  response:
+    body:
+      string: 'data: {"choices":[{"index":0,"finish_reason":null,"delta":{"role":"assistant"}}],"usage":null,"id":"5be9d7cb-325e-4cd6-bb42-32a5f0793baf","created":1775479197,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"```"}}],"usage":null,"id":"5be9d7cb-325e-4cd6-bb42-32a5f0793baf","created":1775479197,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"json\n{\n    "}}],"usage":null,"id":"5be9d7cb-325e-4cd6-bb42-32a5f0793baf","created":1775479197,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"\"segments\":
+        [\"Earth has a diameter of about 12,74"}}],"usage":null,"id":"5be9d7cb-325e-4cd6-bb42-32a5f0793baf","created":1775479197,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"2 km.\",
+        \"Earth is a third planet.\", \"And Earth has a single moon.\"]"}}],"usage":null,"id":"5be9d7cb-325e-4cd6-bb42-32a5f0793baf","created":1775479197,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"\n}\n```"}}],"usage":null,"id":"5be9d7cb-325e-4cd6-bb42-32a5f0793baf","created":1775479197,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":""}}],"usage":null,"id":"5be9d7cb-325e-4cd6-bb42-32a5f0793baf","created":1775479197,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":"stop","delta":{}}],"usage":{"prompt_tokens":276,"completion_tokens":44,"total_tokens":320},"id":"5be9d7cb-325e-4cd6-bb42-32a5f0793baf","created":1775479197,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: [DONE]
+
+
+        '
+    headers:
+      Content-Type:
+      - text/event-stream; charset=utf-8
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"messages":[{"content":"\nBreak down each hypothesis into statements,
+      if hypothesis is complex. Else return hypothesis as a single statement.\n\nA
+      statement is a declarative independent self-contained non-overlapping substring
+      forming a complete sentence derived from the hypothesis.\n\nSingle words, signs,
+      numbers, links, etc. are not statements.\n\nYour response must be in JSON format:\n```json\n{\n    \"hypothesis_statements\":
+      [\n        {\n            \"statements\": [\n                <<statement1 from
+      the first hypothesis>>,\n                <<statement2 from the first hypothesis>>,\n                ...\n            ]\n        },\n        {\n            \"statements\":
+      [\n                <<statement1 from the second hypothesis>>,\n                <<statement2
+      from the second hypothesis>>,\n                ...\n            ]\n        },\n        ...\n    ]\n}\n```\n\nRequest:\nHypotheses:\n\n<hypothesis1>
+      Earth has a diameter of about 12,742 km. </hypothesis1>\n\n<hypothesis2> Earth
+      is a third planet. </hypothesis2>\n\n<hypothesis3> And Earth has a single moon.
+      </hypothesis3>\n","role":"user"}],"model":null,"stream":true,"stream_options":{"include_usage":true}}'
+    headers:
+      Content-Type:
+      - application/json
+      api-key:
+      - REDACTED
+      authorization:
+      - REDACTED
+      host:
+      - dial.test.example.com
+    method: POST
+    uri: https://dial.test.example.com/openai/deployments/gemini-2.5-flash-lite/chat/completions?api-version=2023-12-01-preview
+  response:
+    body:
+      string: 'data: {"choices":[{"index":0,"finish_reason":null,"delta":{"role":"assistant"}}],"usage":null,"id":"d76f3756-4ff3-44c2-b9b1-46f59c05a29f","created":1775479198,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"```"}}],"usage":null,"id":"d76f3756-4ff3-44c2-b9b1-46f59c05a29f","created":1775479198,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"json\n{\n    "}}],"usage":null,"id":"d76f3756-4ff3-44c2-b9b1-46f59c05a29f","created":1775479198,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"\"hypothesis_statements\":
+        [\n        {\n            \"statements\": [\n                "}}],"usage":null,"id":"d76f3756-4ff3-44c2-b9b1-46f59c05a29f","created":1775479198,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"\"Earth
+        has a diameter of about 12,742 km.\"\n            "}}],"usage":null,"id":"d76f3756-4ff3-44c2-b9b1-46f59c05a29f","created":1775479198,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"]\n        },\n        {\n            \"statements\":
+        [\n                \"Earth is a third planet.\"\n            ]\n        },\n        {\n            \"statements\":"}}],"usage":null,"id":"d76f3756-4ff3-44c2-b9b1-46f59c05a29f","created":1775479198,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":" [\n                \"Earth
+        has a single moon.\"\n            ]\n        }\n    ]\n}\n```"}}],"usage":null,"id":"d76f3756-4ff3-44c2-b9b1-46f59c05a29f","created":1775479198,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":""}}],"usage":null,"id":"d76f3756-4ff3-44c2-b9b1-46f59c05a29f","created":1775479198,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":"stop","delta":{}}],"usage":{"prompt_tokens":232,"completion_tokens":100,"total_tokens":332},"id":"d76f3756-4ff3-44c2-b9b1-46f59c05a29f","created":1775479198,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: [DONE]
+
+
+        '
+    headers:
+      Content-Type:
+      - text/event-stream; charset=utf-8
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"messages":[{"content":"\nNatural language inference is the task of determining
+      whether the hypothesis is an entailment, contradiction, or neutral with respect
+      to the premise.\nA hypothesis is a list of statements provided below. \n\n\n\nA
+      statement is considered an entailment if it logically follows from the premise.\nA
+      statement is considered a contradiction if it is logically inconsistent with
+      the premise.\nElse a statement is considered a neutral.\nImportant: Don''t reject
+      entailment just because of minor extra details - if the main meaning holds,
+      it''s still entailment.\n\nFor each statement:\nProvide a brief short(1 sentences)
+      explanation of whether the statement is an entailment, contradiction or neutral
+      with respect to the premise.\nAssign tags based on your explanation: \"ENT\"
+      for entailment, \"CONT\" for contradiction, \"NEUT\" for neutral or if none
+      of the above tags apply.\n\nFormat your response in JSON. You must return only
+      JSON.\n\nFor example, if the premise is \"I am a biology graduate and I work
+      at a tech company.\" and the list of statements is [\"I am a graduate.\", \"I
+      work at a hospital.\"] your response should be:\n\n```json\n{\n    \"statement_inference\":
+      [\n        {\n            \"explanation\": \"It is true that I am a graduate\",\n            \"tag\":
+      \"ENT\"\n        },\n        {\n            \"explanation\": \"Premise states
+      I work at a tech company, not a hospital.\",\n            \"tag\": \"CONT\"\n        }\n    ]\n}\n```\n\nYour
+      response must be in JSON format:\n```json\n{\n    \"statement_inference\": [\n        {\n            \"explanation\":
+      <<explanation>>,\n            \"tag\": <<\"ENT\" or \"CONT\" or \"NEUT\">>\n        },\n        ...\n    ]\n}\n```\nRequest:\n\n\n<premise>\nThe
+      Earth is the third planet from the Sun.\nThe diameter of the Earth is approximately
+      12,742 kilometers, making it the fifth largest planet.\n</premise>\n\nList of
+      statements:\n\n<statement1> Earth is a third planet. </statement1>\n","role":"user"}],"model":null,"stream":true,"stream_options":{"include_usage":true}}'
+    headers:
+      Content-Type:
+      - application/json
+      api-key:
+      - REDACTED
+      authorization:
+      - REDACTED
+      host:
+      - dial.test.example.com
+    method: POST
+    uri: https://dial.test.example.com/openai/deployments/gemini-2.5-flash-lite/chat/completions?api-version=2023-12-01-preview
+  response:
+    body:
+      string: 'data: {"choices":[{"index":0,"finish_reason":null,"delta":{"role":"assistant"}}],"usage":null,"id":"419019d9-91d5-419b-bbd5-9a47ac43e9a9","created":1775479200,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"```"}}],"usage":null,"id":"419019d9-91d5-419b-bbd5-9a47ac43e9a9","created":1775479200,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"json\n{\n    "}}],"usage":null,"id":"419019d9-91d5-419b-bbd5-9a47ac43e9a9","created":1775479200,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"\"statement_inference\":
+        [\n        {\n            \"explanation\": \"The"}}],"usage":null,"id":"419019d9-91d5-419b-bbd5-9a47ac43e9a9","created":1775479200,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":" premise
+        explicitly states that the Earth is the third planet from the Sun.\",\n            \""}}],"usage":null,"id":"419019d9-91d5-419b-bbd5-9a47ac43e9a9","created":1775479200,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"tag\":
+        \"ENT\"\n        }\n    ]\n}\n```"}}],"usage":null,"id":"419019d9-91d5-419b-bbd5-9a47ac43e9a9","created":1775479200,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":""}}],"usage":null,"id":"419019d9-91d5-419b-bbd5-9a47ac43e9a9","created":1775479200,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":"stop","delta":{}}],"usage":{"prompt_tokens":452,"completion_tokens":54,"total_tokens":506},"id":"419019d9-91d5-419b-bbd5-9a47ac43e9a9","created":1775479200,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: [DONE]
+
+
+        '
+    headers:
+      Content-Type:
+      - text/event-stream; charset=utf-8
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"messages":[{"content":"\nNatural language inference is the task of determining
+      whether the hypothesis is an entailment, contradiction, or neutral with respect
+      to the premise.\nA hypothesis is a list of statements provided below. \n\n\n\nA
+      statement is considered an entailment if it logically follows from the premise.\nA
+      statement is considered a contradiction if it is logically inconsistent with
+      the premise.\nElse a statement is considered a neutral.\nImportant: Don''t reject
+      entailment just because of minor extra details - if the main meaning holds,
+      it''s still entailment.\n\nFor each statement:\nProvide a brief short(1 sentences)
+      explanation of whether the statement is an entailment, contradiction or neutral
+      with respect to the premise.\nAssign tags based on your explanation: \"ENT\"
+      for entailment, \"CONT\" for contradiction, \"NEUT\" for neutral or if none
+      of the above tags apply.\n\nFormat your response in JSON. You must return only
+      JSON.\n\nFor example, if the premise is \"I am a biology graduate and I work
+      at a tech company.\" and the list of statements is [\"I am a graduate.\", \"I
+      work at a hospital.\"] your response should be:\n\n```json\n{\n    \"statement_inference\":
+      [\n        {\n            \"explanation\": \"It is true that I am a graduate\",\n            \"tag\":
+      \"ENT\"\n        },\n        {\n            \"explanation\": \"Premise states
+      I work at a tech company, not a hospital.\",\n            \"tag\": \"CONT\"\n        }\n    ]\n}\n```\n\nYour
+      response must be in JSON format:\n```json\n{\n    \"statement_inference\": [\n        {\n            \"explanation\":
+      <<explanation>>,\n            \"tag\": <<\"ENT\" or \"CONT\" or \"NEUT\">>\n        },\n        ...\n    ]\n}\n```\nRequest:\n\n\n<premise>\nThe
+      Earth is the third planet from the Sun.\nThe diameter of the Earth is approximately
+      12,742 kilometers, making it the fifth largest planet.\n</premise>\n\nList of
+      statements:\n\n<statement1> Earth has a diameter of about 12,742 km. </statement1>\n","role":"user"}],"model":null,"stream":true,"stream_options":{"include_usage":true}}'
+    headers:
+      Content-Type:
+      - application/json
+      api-key:
+      - REDACTED
+      authorization:
+      - REDACTED
+      host:
+      - dial.test.example.com
+    method: POST
+    uri: https://dial.test.example.com/openai/deployments/gemini-2.5-flash-lite/chat/completions?api-version=2023-12-01-preview
+  response:
+    body:
+      string: 'data: {"choices":[{"index":0,"finish_reason":null,"delta":{"role":"assistant"}}],"usage":null,"id":"83b7fa68-ca14-4277-9328-3e6e5c9fa999","created":1775479200,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"```"}}],"usage":null,"id":"83b7fa68-ca14-4277-9328-3e6e5c9fa999","created":1775479200,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"json\n{\n    "}}],"usage":null,"id":"83b7fa68-ca14-4277-9328-3e6e5c9fa999","created":1775479200,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"\"statement_inference\":
+        [\n        {\n            \"explanation\": \"The"}}],"usage":null,"id":"83b7fa68-ca14-4277-9328-3e6e5c9fa999","created":1775479200,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":" premise
+        explicitly states that the diameter of the Earth is approximately 12,742"}}],"usage":null,"id":"83b7fa68-ca14-4277-9328-3e6e5c9fa999","created":1775479200,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":" kilometers.\",\n            \"tag\":
+        \"ENT\"\n        }\n    ]\n}\n```"}}],"usage":null,"id":"83b7fa68-ca14-4277-9328-3e6e5c9fa999","created":1775479200,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":""}}],"usage":null,"id":"83b7fa68-ca14-4277-9328-3e6e5c9fa999","created":1775479200,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":"stop","delta":{}}],"usage":{"prompt_tokens":461,"completion_tokens":60,"total_tokens":521},"id":"83b7fa68-ca14-4277-9328-3e6e5c9fa999","created":1775479200,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: [DONE]
+
+
+        '
+    headers:
+      Content-Type:
+      - text/event-stream; charset=utf-8
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"messages":[{"content":"\nNatural language inference is the task of determining
+      whether the hypothesis is an entailment, contradiction, or neutral with respect
+      to the premise.\nA hypothesis is a list of statements provided below. \n\n\n\nA
+      statement is considered an entailment if it logically follows from the premise.\nA
+      statement is considered a contradiction if it is logically inconsistent with
+      the premise.\nElse a statement is considered a neutral.\nImportant: Don''t reject
+      entailment just because of minor extra details - if the main meaning holds,
+      it''s still entailment.\n\nFor each statement:\nProvide a brief short(1 sentences)
+      explanation of whether the statement is an entailment, contradiction or neutral
+      with respect to the premise.\nAssign tags based on your explanation: \"ENT\"
+      for entailment, \"CONT\" for contradiction, \"NEUT\" for neutral or if none
+      of the above tags apply.\n\nFormat your response in JSON. You must return only
+      JSON.\n\nFor example, if the premise is \"I am a biology graduate and I work
+      at a tech company.\" and the list of statements is [\"I am a graduate.\", \"I
+      work at a hospital.\"] your response should be:\n\n```json\n{\n    \"statement_inference\":
+      [\n        {\n            \"explanation\": \"It is true that I am a graduate\",\n            \"tag\":
+      \"ENT\"\n        },\n        {\n            \"explanation\": \"Premise states
+      I work at a tech company, not a hospital.\",\n            \"tag\": \"CONT\"\n        }\n    ]\n}\n```\n\nYour
+      response must be in JSON format:\n```json\n{\n    \"statement_inference\": [\n        {\n            \"explanation\":
+      <<explanation>>,\n            \"tag\": <<\"ENT\" or \"CONT\" or \"NEUT\">>\n        },\n        ...\n    ]\n}\n```\nRequest:\n\n\n<premise>\nThe
+      Earth is the third planet from the Sun.\nThe diameter of the Earth is approximately
+      12,742 kilometers, making it the fifth largest planet.\n</premise>\n\nList of
+      statements:\n\n<statement1> Earth has a single moon. </statement1>\n","role":"user"}],"model":null,"stream":true,"stream_options":{"include_usage":true}}'
+    headers:
+      Content-Type:
+      - application/json
+      api-key:
+      - REDACTED
+      authorization:
+      - REDACTED
+      host:
+      - dial.test.example.com
+    method: POST
+    uri: https://dial.test.example.com/openai/deployments/gemini-2.5-flash-lite/chat/completions?api-version=2023-12-01-preview
+  response:
+    body:
+      string: 'data: {"choices":[{"index":0,"finish_reason":null,"delta":{"role":"assistant"}}],"usage":null,"id":"6f085de7-aa43-4eb2-8bce-4f75bc3bec6b","created":1775479200,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"```"}}],"usage":null,"id":"6f085de7-aa43-4eb2-8bce-4f75bc3bec6b","created":1775479200,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"json\n{"}}],"usage":null,"id":"6f085de7-aa43-4eb2-8bce-4f75bc3bec6b","created":1775479200,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"\n    \"statement_inference\":
+        [\n        {\n            \"explanation\":"}}],"usage":null,"id":"6f085de7-aa43-4eb2-8bce-4f75bc3bec6b","created":1775479200,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":" \"The
+        premise does not mention anything about the number of moons Earth has.\",\n            \"tag"}}],"usage":null,"id":"6f085de7-aa43-4eb2-8bce-4f75bc3bec6b","created":1775479200,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"\":
+        \"NEUT\"\n        }\n    ]\n}\n```"}}],"usage":null,"id":"6f085de7-aa43-4eb2-8bce-4f75bc3bec6b","created":1775479200,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":""}}],"usage":null,"id":"6f085de7-aa43-4eb2-8bce-4f75bc3bec6b","created":1775479200,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":"stop","delta":{}}],"usage":{"prompt_tokens":452,"completion_tokens":54,"total_tokens":506},"id":"6f085de7-aa43-4eb2-8bce-4f75bc3bec6b","created":1775479200,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: [DONE]
+
+
+        '
+    headers:
+      Content-Type:
+      - text/event-stream; charset=utf-8
+    status:
+      code: 200
+      message: OK
+version: 1

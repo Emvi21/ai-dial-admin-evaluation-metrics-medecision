@@ -1,0 +1,14 @@
+.tmp*
+*.ans
+*.log
+__pycache__
+.DS_Store
+.env
+venv
+.venv
+.idea
+.nox
+dist
+~*
+docs/drafts
+allure-results

@@ -1,0 +1,125 @@
+interactions:
+- request:
+    body: '{"messages":[{"content":"For EACH sentence in the given expected output
+      below, determine whether the sentence can be attributed to the nodes of retrieval
+      contexts. Please generate a list of JSON with two keys: `verdict` and `reason`.\n            The
+      `verdict` key should STRICTLY be either a ''yes'' or ''no''. Answer ''yes''
+      if the sentence can be attributed to any parts of the retrieval context, else
+      answer ''no''.\n            The `reason` key should provide a reason why to
+      the verdict. In the reason, you should aim to include the node(s) count in the
+      retrieval context (eg., 1st node, and 2nd node in the retrieval context) that
+      is attributed to said sentence. You should also aim to quote the specific part
+      of the retrieval context to justify your verdict, but keep it extremely concise
+      and cut short the quote with an ellipsis if possible. \n\n            **\n            IMPORTANT:
+      Please make sure to only return in JSON format, with the ''verdicts'' key as
+      a list of JSON objects, each with two keys: `verdict` and `reason`.\n\n            {\n                \"verdicts\":
+      [\n                    {\n                        \"reason\": \"...\",\n                        \"verdict\":
+      \"yes\"\n                    },\n                    ...\n                ]  \n            }\n\n            Since
+      you are going to generate a verdict for each sentence, the number of ''verdicts''
+      SHOULD BE STRICTLY EQUAL to the number of sentences in `expected output`.\n            **\n\n            Expected
+      Output:\n            The diameter of the Earth is approximately 12,742 kilometers.\n\n            Retrieval
+      Context:\n            [''The Earth has a diameter of approximately 12,742 kilometers.'',
+      ''The Earth orbits the Sun at a distance of about 150 million kilometers.'']\n\n            JSON:\n","role":"user"}],"model":null,"stream":true,"stream_options":{"include_usage":true},"tool_choice":{"type":"function","function":{"name":"Verdicts"}},"tools":[{"type":"function","function":{"name":"Verdicts","description":"","parameters":{"properties":{"verdicts":{"items":{"properties":{"verdict":{"type":"string"},"reason":{"type":"string"}},"required":["verdict","reason"],"type":"object"},"type":"array"}},"required":["verdicts"],"type":"object"}}}]}'
+    headers:
+      Content-Type:
+      - application/json
+      api-key:
+      - REDACTED
+      authorization:
+      - REDACTED
+      host:
+      - dial.test.example.com
+    method: POST
+    uri: https://dial.test.example.com/openai/deployments/gemini-2.5-flash-lite/chat/completions?api-version=2023-12-01-preview
+  response:
+    body:
+      string: 'data: {"choices":[{"index":0,"finish_reason":null,"delta":{"role":"assistant"}}],"usage":null,"id":"bdfac9f8-6ce3-4e0d-a53f-ebbf1a61401f","created":1775479517,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":null,"tool_calls":[{"index":0,"id":"Verdicts_1","type":"function","function":{"name":"Verdicts","arguments":"{\"verdicts\":
+        [{\"reason\": \"The sentence \\\"The diameter of the Earth is approximately
+        12,742 kilometers.\\\" can be attributed to the 1st node in the retrieval
+        context. The node states: \\\"The Earth has a diameter of approximately 12,742
+        kilometers.\\\"\", \"verdict\": \"yes\"}]}"}}]}}],"usage":null,"id":"bdfac9f8-6ce3-4e0d-a53f-ebbf1a61401f","created":1775479517,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":""}}],"usage":null,"id":"bdfac9f8-6ce3-4e0d-a53f-ebbf1a61401f","created":1775479517,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":"tool_calls","delta":{}}],"usage":{"prompt_tokens":381,"completion_tokens":62,"total_tokens":443},"id":"bdfac9f8-6ce3-4e0d-a53f-ebbf1a61401f","created":1775479517,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: [DONE]
+
+
+        '
+    headers:
+      Content-Type:
+      - text/event-stream; charset=utf-8
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"messages":[{"content":"Given the original expected output, a list of
+      supportive reasons, and a list of unsupportive reasons (which are deduced directly
+      from the original expected output), and a contextual recall score (closer to
+      1 the better), summarize a CONCISE reason for the score.\n            A supportive
+      reason is the reason why a certain sentence in the original expected output
+      can be attributed to the node in the retrieval context.\n            An unsupportive
+      reason is the reason why a certain sentence in the original expected output
+      cannot be attributed to anything in the retrieval context.\n            In your
+      reason, you should relate supportive/unsupportive reasons to the sentence number
+      in expected output, and include info regarding the node number in retrieval
+      context to support your final reason. The first mention of \"node(s)\" should
+      specify \"node(s) in retrieval context.\n\n            **\n            IMPORTANT:
+      Please make sure to only return in JSON format, with the ''reason'' key providing
+      the reason.\n            Example JSON:\n            {\n                \"reason\":
+      \"The score is <contextual_recall_score> because <your_reason>.\"\n            }\n\n            DO
+      NOT mention ''supportive reasons'' and ''unsupportive reasons'' in your reason,
+      these terms are just here for you to understand the broader scope of things.\n            If
+      the score is 1, keep it short and say something positive with an upbeat encouraging
+      tone (but don''t overdo it otherwise it gets annoying).\n            **\n\n            Contextual
+      Recall Score:\n            1.00\n\n            Expected Output:\n            The
+      diameter of the Earth is approximately 12,742 kilometers.\n\n            Supportive
+      Reasons:\n            [''The sentence \"The diameter of the Earth is approximately
+      12,742 kilometers.\" can be attributed to the 1st node in the retrieval context.
+      The node states: \"The Earth has a diameter of approximately 12,742 kilometers.\"'']\n\n            Unsupportive
+      Reasons:\n            []\n\n            JSON:\n","role":"user"}],"model":null,"stream":true,"stream_options":{"include_usage":true},"tool_choice":{"type":"function","function":{"name":"ContextualRecallScoreReason"}},"tools":[{"type":"function","function":{"name":"ContextualRecallScoreReason","description":"","parameters":{"properties":{"reason":{"type":"string"}},"required":["reason"],"type":"object"}}}]}'
+    headers:
+      Content-Type:
+      - application/json
+      api-key:
+      - REDACTED
+      authorization:
+      - REDACTED
+      host:
+      - dial.test.example.com
+    method: POST
+    uri: https://dial.test.example.com/openai/deployments/gemini-2.5-flash-lite/chat/completions?api-version=2023-12-01-preview
+  response:
+    body:
+      string: 'data: {"choices":[{"index":0,"finish_reason":null,"delta":{"role":"assistant"}}],"usage":null,"id":"5c43462e-7b4d-49a7-8051-4c4d92bda914","created":1775479519,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":null,"tool_calls":[{"index":0,"id":"ContextualRecallScoreReason_1","type":"function","function":{"name":"ContextualRecallScoreReason","arguments":"{\"reason\":
+        \"The score is 1.00 because the sentence in the expected output is directly
+        supported by the provided context from node 1.\"}"}}]}}],"usage":null,"id":"5c43462e-7b4d-49a7-8051-4c4d92bda914","created":1775479519,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":""}}],"usage":null,"id":"5c43462e-7b4d-49a7-8051-4c4d92bda914","created":1775479519,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":"tool_calls","delta":{}}],"usage":{"prompt_tokens":424,"completion_tokens":33,"total_tokens":457},"id":"5c43462e-7b4d-49a7-8051-4c4d92bda914","created":1775479519,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: [DONE]
+
+
+        '
+    headers:
+      Content-Type:
+      - text/event-stream; charset=utf-8
+    status:
+      code: 200
+      message: OK
+version: 1

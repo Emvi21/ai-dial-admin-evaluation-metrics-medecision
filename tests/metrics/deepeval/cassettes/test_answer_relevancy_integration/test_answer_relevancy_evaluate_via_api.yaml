@@ -1,0 +1,165 @@
+interactions:
+- request:
+    body: "{\"messages\":[{\"content\":\"Given the text, breakdown and generate a
+      list of statements presented. Ambiguous statements and single words can be considered
+      as statements, but only if outside of a coherent statement.\\n\\nExample:\\nExample
+      text: \\nOur new laptop model features a high-resolution Retina display for
+      crystal-clear visuals. It also includes a fast-charging battery, giving you
+      up to 12 hours of usage on a single charge. For security, we\u2019ve added fingerprint
+      authentication and an encrypted SSD. Plus, every purchase comes with a one-year
+      warranty and 24/7 customer support.\\n\\n\\n\\n{\\n    \\\"statements\\\": [\\n
+      \       \\\"The new laptop model has a high-resolution Retina display.\\\",\\n
+      \       \\\"It includes a fast-charging battery with up to 12 hours of usage.\\\",\\n
+      \       \\\"Security features include fingerprint authentication and an encrypted
+      SSD.\\\",\\n        \\\"Every purchase comes with a one-year warranty.\\\",\\n
+      \       \\\"24/7 customer support is included.\\\"\\n    ]\\n}\\n===== END OF
+      EXAMPLE ======\\n        \\n**\\nIMPORTANT: Please make sure to only return
+      in valid and parseable JSON format, with the \\\"statements\\\" key mapping
+      to a list of strings. No words or explanation are needed. Ensure all strings
+      are closed appropriately. Repair any invalid JSON before you output it.\\n**\\n\\nText:\\nThe
+      diameter of the Earth is approximately 12,742 kilometers.\\n\\nJSON:\\n\",\"role\":\"user\"}],\"model\":null,\"stream\":true,\"stream_options\":{\"include_usage\":true},\"tool_choice\":{\"type\":\"function\",\"function\":{\"name\":\"Statements\"}},\"tools\":[{\"type\":\"function\",\"function\":{\"name\":\"Statements\",\"description\":\"\",\"parameters\":{\"properties\":{\"statements\":{\"items\":{\"type\":\"string\"},\"type\":\"array\"}},\"required\":[\"statements\"],\"type\":\"object\"}}}]}"
+    headers:
+      Content-Type:
+      - application/json
+      api-key:
+      - REDACTED
+      authorization:
+      - REDACTED
+      host:
+      - dial.test.example.com
+    method: POST
+    uri: https://dial.test.example.com/openai/deployments/gemini-2.5-flash-lite/chat/completions?api-version=2023-12-01-preview
+  response:
+    body:
+      string: 'data: {"choices":[{"index":0,"finish_reason":null,"delta":{"role":"assistant"}}],"usage":null,"id":"ab5d204d-e14e-44ab-a25b-726f972457e1","created":1775479224,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":null,"tool_calls":[{"index":0,"id":"Statements_1","type":"function","function":{"name":"Statements","arguments":"{\"statements\":
+        [\"The diameter of the Earth is approximately 12,742 kilometers.\"]}"}}]}}],"usage":null,"id":"ab5d204d-e14e-44ab-a25b-726f972457e1","created":1775479224,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":""}}],"usage":null,"id":"ab5d204d-e14e-44ab-a25b-726f972457e1","created":1775479224,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":"tool_calls","delta":{}}],"usage":{"prompt_tokens":294,"completion_tokens":18,"total_tokens":312},"id":"ab5d204d-e14e-44ab-a25b-726f972457e1","created":1775479224,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: [DONE]
+
+
+        '
+    headers:
+      Content-Type:
+      - text/event-stream; charset=utf-8
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"messages":[{"content":"For the provided list of statements, determine
+      whether each statement is relevant to address the input.\nGenerate JSON objects
+      with ''verdict'' and ''reason'' fields.\nThe ''verdict'' should be ''yes'' (relevant),
+      ''no'' (irrelevant), or ''idk'' (ambiguous/supporting information).\nProvide
+      ''reason'' ONLY for ''no'' or ''idk'' verdicts.\nThe statements are from an
+      AI''s actual output.\n\n\n\n**\nIMPORTANT: Please make sure to only return in
+      valid and parseable JSON format, with the ''verdicts'' key mapping to a list
+      of JSON objects. Ensure all strings are closed appropriately. Repair any invalid
+      JSON before you output it.\n\nExpected JSON format:\n{\n    \"verdicts\": [\n        {\n            \"verdict\":
+      \"yes\"\n        },\n        {\n            \"reason\": <explanation_for_irrelevance>,\n            \"verdict\":
+      \"no\"\n        },\n        {\n            \"reason\": <explanation_for_ambiguity>,\n            \"verdict\":
+      \"idk\"\n        }\n    ]  \n}\n\nGenerate ONE verdict per statement - number
+      of ''verdicts'' MUST equal number of statements.\n''verdict'' must be STRICTLY
+      ''yes'', ''no'', or ''idk'':\n- ''yes'': statement is relevant to addressing
+      the input\n- ''no'': statement is irrelevant to the input  \n- ''idk'': statement
+      is ambiguous (not directly relevant but could be supporting information)\nProvide
+      ''reason'' ONLY for ''no'' or ''idk'' verdicts.\n**          \n\nInput:\nWhat
+      is the diameter of the Earth?\n\nStatements:\n[''The diameter of the Earth is
+      approximately 12,742 kilometers.'']\n\nJSON:\n","role":"user"}],"model":null,"stream":true,"stream_options":{"include_usage":true},"tool_choice":{"type":"function","function":{"name":"Verdicts"}},"tools":[{"type":"function","function":{"name":"Verdicts","description":"","parameters":{"properties":{"verdicts":{"items":{"properties":{"verdict":{"enum":["yes","no","idk"],"type":"string"},"reason":{"anyOf":[{"type":"string"},{"type":"null"}],"default":null}},"required":["verdict"],"type":"object"},"type":"array"}},"required":["verdicts"],"type":"object"}}}]}'
+    headers:
+      Content-Type:
+      - application/json
+      api-key:
+      - REDACTED
+      authorization:
+      - REDACTED
+      host:
+      - dial.test.example.com
+    method: POST
+    uri: https://dial.test.example.com/openai/deployments/gemini-2.5-flash-lite/chat/completions?api-version=2023-12-01-preview
+  response:
+    body:
+      string: 'data: {"choices":[{"index":0,"finish_reason":null,"delta":{"role":"assistant"}}],"usage":null,"id":"9fbcd75c-38c2-4d5c-b9d3-93ce9c87a22f","created":1775479226,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":null,"tool_calls":[{"index":0,"id":"Verdicts_1","type":"function","function":{"name":"Verdicts","arguments":"{\"verdicts\":
+        [{\"verdict\": \"yes\"}]}"}}]}}],"usage":null,"id":"9fbcd75c-38c2-4d5c-b9d3-93ce9c87a22f","created":1775479226,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":""}}],"usage":null,"id":"9fbcd75c-38c2-4d5c-b9d3-93ce9c87a22f","created":1775479226,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":"tool_calls","delta":{}}],"usage":{"prompt_tokens":379,"completion_tokens":7,"total_tokens":386},"id":"9fbcd75c-38c2-4d5c-b9d3-93ce9c87a22f","created":1775479226,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: [DONE]
+
+
+        '
+    headers:
+      Content-Type:
+      - text/event-stream; charset=utf-8
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"messages":[{"content":"Given the answer relevancy score, the list of
+      reasons of irrelevant statements made in the actual output, and the input, provide
+      a CONCISE reason for the score. Explain why it is not higher, but also why it
+      is at its current score.\nThe irrelevant statements represent things in the
+      actual output that is irrelevant to addressing whatever is asked/talked about
+      in the input.\nIf there is nothing irrelevant, just say something positive with
+      an upbeat encouraging tone (but don''t overdo it otherwise it gets annoying).\n\n\n\n**\nIMPORTANT:
+      Please make sure to only return in JSON format, with the ''reason'' key providing
+      the reason. Ensure all strings are closed appropriately. Repair any invalid
+      JSON before you output it.\n\nExample:\nExample JSON:\n{\n    \"reason\": \"The
+      score is <answer_relevancy_score> because <your_reason>.\"\n}\n===== END OF
+      EXAMPLE ======\n**\n\n\nAnswer Relevancy Score:\n1.00\n\nReasons why the score
+      can''t be higher based on irrelevant statements in the actual output:\n[]\n\nInput:\nWhat
+      is the diameter of the Earth?\n\nJSON:\n","role":"user"}],"model":null,"stream":true,"stream_options":{"include_usage":true},"tool_choice":{"type":"function","function":{"name":"AnswerRelevancyScoreReason"}},"tools":[{"type":"function","function":{"name":"AnswerRelevancyScoreReason","description":"","parameters":{"properties":{"reason":{"type":"string"}},"required":["reason"],"type":"object"}}}]}'
+    headers:
+      Content-Type:
+      - application/json
+      api-key:
+      - REDACTED
+      authorization:
+      - REDACTED
+      host:
+      - dial.test.example.com
+    method: POST
+    uri: https://dial.test.example.com/openai/deployments/gemini-2.5-flash-lite/chat/completions?api-version=2023-12-01-preview
+  response:
+    body:
+      string: 'data: {"choices":[{"index":0,"finish_reason":null,"delta":{"role":"assistant"}}],"usage":null,"id":"6ac4b477-325d-41fc-a186-929cb7d11547","created":1775479227,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":null,"tool_calls":[{"index":0,"id":"AnswerRelevancyScoreReason_1","type":"function","function":{"name":"AnswerRelevancyScoreReason","arguments":"{\"reason\":
+        \"The score is 1.00 because the answer is perfectly relevant to the input
+        question. All of the output is relevant to the question asked.\"}"}}]}}],"usage":null,"id":"6ac4b477-325d-41fc-a186-929cb7d11547","created":1775479227,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":""}}],"usage":null,"id":"6ac4b477-325d-41fc-a186-929cb7d11547","created":1775479227,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":"tool_calls","delta":{}}],"usage":{"prompt_tokens":245,"completion_tokens":37,"total_tokens":282},"id":"6ac4b477-325d-41fc-a186-929cb7d11547","created":1775479227,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: [DONE]
+
+
+        '
+    headers:
+      Content-Type:
+      - text/event-stream; charset=utf-8
+    status:
+      code: 200
+      message: OK
+version: 1

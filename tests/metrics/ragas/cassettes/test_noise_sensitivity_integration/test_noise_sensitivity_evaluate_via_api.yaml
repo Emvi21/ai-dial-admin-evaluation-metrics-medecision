@@ -1,0 +1,370 @@
+interactions:
+- request:
+    body: '{"messages":[{"content":"Given a question and an answer, analyze the complexity
+      of each sentence in the answer. Break down each sentence into one or more fully
+      understandable statements. Ensure that no pronouns are used in any statement.
+      Format the outputs in JSON.\nPlease return the output in a JSON format that
+      complies with the following schema as specified in JSON Schema:\n{\"properties\":
+      {\"statements\": {\"description\": \"The generated statements\", \"items\":
+      {\"type\": \"string\"}, \"title\": \"Statements\", \"type\": \"array\"}}, \"required\":
+      [\"statements\"], \"title\": \"StatementGeneratorOutput\", \"type\": \"object\"}Do
+      not use single quotes in your response but double quotes,properly escaped with
+      a backslash.\n\n--------EXAMPLES-----------\nExample 1\nInput: {\n    \"question\":
+      \"Who was Albert Einstein and what is he best known for?\",\n    \"answer\":
+      \"He was a German-born theoretical physicist, widely acknowledged to be one
+      of the greatest and most influential physicists of all time. He was best known
+      for developing the theory of relativity, he also made important contributions
+      to the development of the theory of quantum mechanics.\"\n}\nOutput: {\n    \"statements\":
+      [\n        \"Albert Einstein was a German-born theoretical physicist.\",\n        \"Albert
+      Einstein is recognized as one of the greatest and most influential physicists
+      of all time.\",\n        \"Albert Einstein was best known for developing the
+      theory of relativity.\",\n        \"Albert Einstein made important contributions
+      to the development of the theory of quantum mechanics.\"\n    ]\n}\n-----------------------------\n\nNow
+      perform the same with the following input\ninput: {\n    \"question\": \"When
+      was the Eiffel Tower built?\",\n    \"answer\": \"The Eiffel Tower was constructed
+      from 1887 to 1889.\"\n}\nOutput: ","role":"user"}],"model":null,"stream":true,"stream_options":{"include_usage":true},"tool_choice":{"type":"function","function":{"name":"StatementGeneratorOutput"}},"tools":[{"type":"function","function":{"name":"StatementGeneratorOutput","description":"Output
+      from statement generation.","parameters":{"properties":{"statements":{"description":"Generated
+      statements","items":{"type":"string"},"type":"array"}},"required":["statements"],"type":"object"}}}]}'
+    headers:
+      Content-Type:
+      - application/json
+      api-key:
+      - REDACTED
+      authorization:
+      - REDACTED
+      host:
+      - dial.test.example.com
+    method: POST
+    uri: https://dial.test.example.com/openai/deployments/gemini-2.5-flash-lite/chat/completions?api-version=2023-12-01-preview
+  response:
+    body:
+      string: 'data: {"choices":[{"index":0,"finish_reason":null,"delta":{"role":"assistant"}}],"usage":null,"id":"211d9fac-6152-4b3c-a04e-508ea106cf79","created":1775497850,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":null,"tool_calls":[{"index":0,"id":"StatementGeneratorOutput_1","type":"function","function":{"name":"StatementGeneratorOutput","arguments":"{\"statements\":
+        [\"The Eiffel Tower was constructed from 1887 to 1889.\"]}"}}]}}],"usage":null,"id":"211d9fac-6152-4b3c-a04e-508ea106cf79","created":1775497850,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":""}}],"usage":null,"id":"211d9fac-6152-4b3c-a04e-508ea106cf79","created":1775497850,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":"tool_calls","delta":{}}],"usage":{"prompt_tokens":380,"completion_tokens":22,"total_tokens":402},"id":"211d9fac-6152-4b3c-a04e-508ea106cf79","created":1775497850,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: [DONE]
+
+
+        '
+    headers:
+      Content-Type:
+      - text/event-stream; charset=utf-8
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"messages":[{"content":"Given a question and an answer, analyze the complexity
+      of each sentence in the answer. Break down each sentence into one or more fully
+      understandable statements. Ensure that no pronouns are used in any statement.
+      Format the outputs in JSON.\nPlease return the output in a JSON format that
+      complies with the following schema as specified in JSON Schema:\n{\"properties\":
+      {\"statements\": {\"description\": \"The generated statements\", \"items\":
+      {\"type\": \"string\"}, \"title\": \"Statements\", \"type\": \"array\"}}, \"required\":
+      [\"statements\"], \"title\": \"StatementGeneratorOutput\", \"type\": \"object\"}Do
+      not use single quotes in your response but double quotes,properly escaped with
+      a backslash.\n\n--------EXAMPLES-----------\nExample 1\nInput: {\n    \"question\":
+      \"Who was Albert Einstein and what is he best known for?\",\n    \"answer\":
+      \"He was a German-born theoretical physicist, widely acknowledged to be one
+      of the greatest and most influential physicists of all time. He was best known
+      for developing the theory of relativity, he also made important contributions
+      to the development of the theory of quantum mechanics.\"\n}\nOutput: {\n    \"statements\":
+      [\n        \"Albert Einstein was a German-born theoretical physicist.\",\n        \"Albert
+      Einstein is recognized as one of the greatest and most influential physicists
+      of all time.\",\n        \"Albert Einstein was best known for developing the
+      theory of relativity.\",\n        \"Albert Einstein made important contributions
+      to the development of the theory of quantum mechanics.\"\n    ]\n}\n-----------------------------\n\nNow
+      perform the same with the following input\ninput: {\n    \"question\": \"When
+      was the Eiffel Tower built?\",\n    \"answer\": \"The Eiffel Tower was built
+      in 1889.\"\n}\nOutput: ","role":"user"}],"model":null,"stream":true,"stream_options":{"include_usage":true},"tool_choice":{"type":"function","function":{"name":"StatementGeneratorOutput"}},"tools":[{"type":"function","function":{"name":"StatementGeneratorOutput","description":"Output
+      from statement generation.","parameters":{"properties":{"statements":{"description":"Generated
+      statements","items":{"type":"string"},"type":"array"}},"required":["statements"],"type":"object"}}}]}'
+    headers:
+      Content-Type:
+      - application/json
+      api-key:
+      - REDACTED
+      authorization:
+      - REDACTED
+      host:
+      - dial.test.example.com
+    method: POST
+    uri: https://dial.test.example.com/openai/deployments/gemini-2.5-flash-lite/chat/completions?api-version=2023-12-01-preview
+  response:
+    body:
+      string: 'data: {"choices":[{"index":0,"finish_reason":null,"delta":{"role":"assistant"}}],"usage":null,"id":"a88f5971-b70e-4667-9bf9-b3bef9a194fe","created":1775497851,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":null,"tool_calls":[{"index":0,"id":"StatementGeneratorOutput_1","type":"function","function":{"name":"StatementGeneratorOutput","arguments":"{\"statements\":
+        [\"The Eiffel Tower was built in 1889.\"]}"}}]}}],"usage":null,"id":"a88f5971-b70e-4667-9bf9-b3bef9a194fe","created":1775497851,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":""}}],"usage":null,"id":"a88f5971-b70e-4667-9bf9-b3bef9a194fe","created":1775497851,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":"tool_calls","delta":{}}],"usage":{"prompt_tokens":374,"completion_tokens":16,"total_tokens":390},"id":"a88f5971-b70e-4667-9bf9-b3bef9a194fe","created":1775497851,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: [DONE]
+
+
+        '
+    headers:
+      Content-Type:
+      - text/event-stream; charset=utf-8
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"messages":[{"content":"Your task is to judge the faithfulness of a series
+      of statements based on a given context. For each statement you must return verdict
+      as 1 if the statement can be directly inferred based on the context or 0 if
+      the statement can not be directly inferred based on the context.\nPlease return
+      the output in a JSON format that complies with the following schema as specified
+      in JSON Schema:\n{\"$defs\": {\"StatementFaithfulnessAnswer\": {\"properties\":
+      {\"statement\": {\"description\": \"the original statement, word-by-word\",
+      \"title\": \"Statement\", \"type\": \"string\"}, \"reason\": {\"description\":
+      \"the reason of the verdict\", \"title\": \"Reason\", \"type\": \"string\"},
+      \"verdict\": {\"description\": \"the verdict(0/1) of the faithfulness.\", \"title\":
+      \"Verdict\", \"type\": \"integer\"}}, \"required\": [\"statement\", \"reason\",
+      \"verdict\"], \"title\": \"StatementFaithfulnessAnswer\", \"type\": \"object\"}},
+      \"properties\": {\"statements\": {\"items\": {\"$ref\": \"#/$defs/StatementFaithfulnessAnswer\"},
+      \"title\": \"Statements\", \"type\": \"array\"}}, \"required\": [\"statements\"],
+      \"title\": \"NLIStatementOutput\", \"type\": \"object\"}Do not use single quotes
+      in your response but double quotes,properly escaped with a backslash.\n\n--------EXAMPLES-----------\nExample
+      1\nInput: {\n    \"context\": \"John is a student at XYZ University. He is pursuing
+      a degree in Computer Science. He is enrolled in several courses this semester,
+      including Data Structures, Algorithms, and Database Management. John is a diligent
+      student and spends a significant amount of time studying and completing assignments.
+      He often stays late in the library to work on his projects.\",\n    \"statements\":
+      [\n        \"John is majoring in Biology.\",\n        \"John is taking a course
+      on Artificial Intelligence.\",\n        \"John is a dedicated student.\",\n        \"John
+      has a part-time job.\"\n    ]\n}\nOutput: {\n    \"statements\": [\n        {\n            \"statement\":
+      \"John is majoring in Biology.\",\n            \"reason\": \"John''s major is
+      explicitly stated as Computer Science, not Biology.\",\n            \"verdict\":
+      0\n        },\n        {\n            \"statement\": \"John is taking a course
+      on Artificial Intelligence.\",\n            \"reason\": \"The context mentions
+      courses in Data Structures, Algorithms, and Database Management, but does not
+      mention Artificial Intelligence.\",\n            \"verdict\": 0\n        },\n        {\n            \"statement\":
+      \"John is a dedicated student.\",\n            \"reason\": \"The context states
+      that John is a diligent student who spends a significant amount of time studying
+      and completing assignments.\",\n            \"verdict\": 1\n        },\n        {\n            \"statement\":
+      \"John has a part-time job.\",\n            \"reason\": \"There is no information
+      in the context about John having a part-time job.\",\n            \"verdict\":
+      0\n        }\n    ]\n}\n-----------------------------\n\nNow perform the same
+      with the following input\ninput: {\n    \"context\": \"The Eiffel Tower was
+      constructed from 1887 to 1889 as the entrance arch for the 1889 World''s Fair.\",\n    \"statements\":
+      [\n        \"The Eiffel Tower was constructed from 1887 to 1889.\"\n    ]\n}\nOutput:
+      ","role":"user"}],"model":null,"stream":true,"stream_options":{"include_usage":true},"tool_choice":{"type":"function","function":{"name":"StatementFaithfulnessOutput"}},"tools":[{"type":"function","function":{"name":"StatementFaithfulnessOutput","description":"Output
+      from NLI statement evaluation.","parameters":{"properties":{"statements":{"items":{"description":"Individual
+      statement with reason and verdict for NLI evaluation.","properties":{"statement":{"type":"string"},"reason":{"type":"string"},"verdict":{"type":"integer"}},"required":["statement","reason","verdict"],"type":"object"},"type":"array"}},"required":["statements"],"type":"object"}}}]}'
+    headers:
+      Content-Type:
+      - application/json
+      api-key:
+      - REDACTED
+      authorization:
+      - REDACTED
+      host:
+      - dial.test.example.com
+    method: POST
+    uri: https://dial.test.example.com/openai/deployments/gemini-2.5-flash-lite/chat/completions?api-version=2023-12-01-preview
+  response:
+    body:
+      string: 'data: {"choices":[{"index":0,"finish_reason":null,"delta":{"role":"assistant"}}],"usage":null,"id":"7fe9e6d1-e28d-4526-a24f-f8cb6e8ec8e3","created":1775497852,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":null,"tool_calls":[{"index":0,"id":"StatementFaithfulnessOutput_1","type":"function","function":{"name":"StatementFaithfulnessOutput","arguments":"{\"statements\":
+        [{\"verdict\": 1, \"reason\": \"The statement is directly supported by the
+        context.\", \"statement\": \"The Eiffel Tower was constructed from 1887 to
+        1889.\"}]}"}}]}}],"usage":null,"id":"7fe9e6d1-e28d-4526-a24f-f8cb6e8ec8e3","created":1775497852,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":""}}],"usage":null,"id":"7fe9e6d1-e28d-4526-a24f-f8cb6e8ec8e3","created":1775497852,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":"tool_calls","delta":{}}],"usage":{"prompt_tokens":739,"completion_tokens":37,"total_tokens":776},"id":"7fe9e6d1-e28d-4526-a24f-f8cb6e8ec8e3","created":1775497852,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: [DONE]
+
+
+        '
+    headers:
+      Content-Type:
+      - text/event-stream; charset=utf-8
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"messages":[{"content":"Your task is to judge the faithfulness of a series
+      of statements based on a given context. For each statement you must return verdict
+      as 1 if the statement can be directly inferred based on the context or 0 if
+      the statement can not be directly inferred based on the context.\nPlease return
+      the output in a JSON format that complies with the following schema as specified
+      in JSON Schema:\n{\"$defs\": {\"StatementFaithfulnessAnswer\": {\"properties\":
+      {\"statement\": {\"description\": \"the original statement, word-by-word\",
+      \"title\": \"Statement\", \"type\": \"string\"}, \"reason\": {\"description\":
+      \"the reason of the verdict\", \"title\": \"Reason\", \"type\": \"string\"},
+      \"verdict\": {\"description\": \"the verdict(0/1) of the faithfulness.\", \"title\":
+      \"Verdict\", \"type\": \"integer\"}}, \"required\": [\"statement\", \"reason\",
+      \"verdict\"], \"title\": \"StatementFaithfulnessAnswer\", \"type\": \"object\"}},
+      \"properties\": {\"statements\": {\"items\": {\"$ref\": \"#/$defs/StatementFaithfulnessAnswer\"},
+      \"title\": \"Statements\", \"type\": \"array\"}}, \"required\": [\"statements\"],
+      \"title\": \"NLIStatementOutput\", \"type\": \"object\"}Do not use single quotes
+      in your response but double quotes,properly escaped with a backslash.\n\n--------EXAMPLES-----------\nExample
+      1\nInput: {\n    \"context\": \"John is a student at XYZ University. He is pursuing
+      a degree in Computer Science. He is enrolled in several courses this semester,
+      including Data Structures, Algorithms, and Database Management. John is a diligent
+      student and spends a significant amount of time studying and completing assignments.
+      He often stays late in the library to work on his projects.\",\n    \"statements\":
+      [\n        \"John is majoring in Biology.\",\n        \"John is taking a course
+      on Artificial Intelligence.\",\n        \"John is a dedicated student.\",\n        \"John
+      has a part-time job.\"\n    ]\n}\nOutput: {\n    \"statements\": [\n        {\n            \"statement\":
+      \"John is majoring in Biology.\",\n            \"reason\": \"John''s major is
+      explicitly stated as Computer Science, not Biology.\",\n            \"verdict\":
+      0\n        },\n        {\n            \"statement\": \"John is taking a course
+      on Artificial Intelligence.\",\n            \"reason\": \"The context mentions
+      courses in Data Structures, Algorithms, and Database Management, but does not
+      mention Artificial Intelligence.\",\n            \"verdict\": 0\n        },\n        {\n            \"statement\":
+      \"John is a dedicated student.\",\n            \"reason\": \"The context states
+      that John is a diligent student who spends a significant amount of time studying
+      and completing assignments.\",\n            \"verdict\": 1\n        },\n        {\n            \"statement\":
+      \"John has a part-time job.\",\n            \"reason\": \"There is no information
+      in the context about John having a part-time job.\",\n            \"verdict\":
+      0\n        }\n    ]\n}\n-----------------------------\n\nNow perform the same
+      with the following input\ninput: {\n    \"context\": \"The Eiffel Tower was
+      constructed from 1887 to 1889 as the entrance arch for the 1889 World''s Fair.\",\n    \"statements\":
+      [\n        \"The Eiffel Tower was built in 1889.\"\n    ]\n}\nOutput: ","role":"user"}],"model":null,"stream":true,"stream_options":{"include_usage":true},"tool_choice":{"type":"function","function":{"name":"StatementFaithfulnessOutput"}},"tools":[{"type":"function","function":{"name":"StatementFaithfulnessOutput","description":"Output
+      from NLI statement evaluation.","parameters":{"properties":{"statements":{"items":{"description":"Individual
+      statement with reason and verdict for NLI evaluation.","properties":{"statement":{"type":"string"},"reason":{"type":"string"},"verdict":{"type":"integer"}},"required":["statement","reason","verdict"],"type":"object"},"type":"array"}},"required":["statements"],"type":"object"}}}]}'
+    headers:
+      Content-Type:
+      - application/json
+      api-key:
+      - REDACTED
+      authorization:
+      - REDACTED
+      host:
+      - dial.test.example.com
+    method: POST
+    uri: https://dial.test.example.com/openai/deployments/gemini-2.5-flash-lite/chat/completions?api-version=2023-12-01-preview
+  response:
+    body:
+      string: 'data: {"choices":[{"index":0,"finish_reason":null,"delta":{"role":"assistant"}}],"usage":null,"id":"30a4af94-6f6d-46a9-8dc9-f3cb799483a1","created":1775497854,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":null,"tool_calls":[{"index":0,"id":"StatementFaithfulnessOutput_1","type":"function","function":{"name":"StatementFaithfulnessOutput","arguments":"{\"statements\":
+        [{\"verdict\": 1, \"reason\": \"The context states that the Eiffel Tower was
+        constructed from 1887 to 1889, which includes the year 1889.\", \"statement\":
+        \"The Eiffel Tower was built in 1889.\"}]}"}}]}}],"usage":null,"id":"30a4af94-6f6d-46a9-8dc9-f3cb799483a1","created":1775497854,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":""}}],"usage":null,"id":"30a4af94-6f6d-46a9-8dc9-f3cb799483a1","created":1775497854,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":"tool_calls","delta":{}}],"usage":{"prompt_tokens":733,"completion_tokens":54,"total_tokens":787},"id":"30a4af94-6f6d-46a9-8dc9-f3cb799483a1","created":1775497854,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: [DONE]
+
+
+        '
+    headers:
+      Content-Type:
+      - text/event-stream; charset=utf-8
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"messages":[{"content":"Your task is to judge the faithfulness of a series
+      of statements based on a given context. For each statement you must return verdict
+      as 1 if the statement can be directly inferred based on the context or 0 if
+      the statement can not be directly inferred based on the context.\nPlease return
+      the output in a JSON format that complies with the following schema as specified
+      in JSON Schema:\n{\"$defs\": {\"StatementFaithfulnessAnswer\": {\"properties\":
+      {\"statement\": {\"description\": \"the original statement, word-by-word\",
+      \"title\": \"Statement\", \"type\": \"string\"}, \"reason\": {\"description\":
+      \"the reason of the verdict\", \"title\": \"Reason\", \"type\": \"string\"},
+      \"verdict\": {\"description\": \"the verdict(0/1) of the faithfulness.\", \"title\":
+      \"Verdict\", \"type\": \"integer\"}}, \"required\": [\"statement\", \"reason\",
+      \"verdict\"], \"title\": \"StatementFaithfulnessAnswer\", \"type\": \"object\"}},
+      \"properties\": {\"statements\": {\"items\": {\"$ref\": \"#/$defs/StatementFaithfulnessAnswer\"},
+      \"title\": \"Statements\", \"type\": \"array\"}}, \"required\": [\"statements\"],
+      \"title\": \"NLIStatementOutput\", \"type\": \"object\"}Do not use single quotes
+      in your response but double quotes,properly escaped with a backslash.\n\n--------EXAMPLES-----------\nExample
+      1\nInput: {\n    \"context\": \"John is a student at XYZ University. He is pursuing
+      a degree in Computer Science. He is enrolled in several courses this semester,
+      including Data Structures, Algorithms, and Database Management. John is a diligent
+      student and spends a significant amount of time studying and completing assignments.
+      He often stays late in the library to work on his projects.\",\n    \"statements\":
+      [\n        \"John is majoring in Biology.\",\n        \"John is taking a course
+      on Artificial Intelligence.\",\n        \"John is a dedicated student.\",\n        \"John
+      has a part-time job.\"\n    ]\n}\nOutput: {\n    \"statements\": [\n        {\n            \"statement\":
+      \"John is majoring in Biology.\",\n            \"reason\": \"John''s major is
+      explicitly stated as Computer Science, not Biology.\",\n            \"verdict\":
+      0\n        },\n        {\n            \"statement\": \"John is taking a course
+      on Artificial Intelligence.\",\n            \"reason\": \"The context mentions
+      courses in Data Structures, Algorithms, and Database Management, but does not
+      mention Artificial Intelligence.\",\n            \"verdict\": 0\n        },\n        {\n            \"statement\":
+      \"John is a dedicated student.\",\n            \"reason\": \"The context states
+      that John is a diligent student who spends a significant amount of time studying
+      and completing assignments.\",\n            \"verdict\": 1\n        },\n        {\n            \"statement\":
+      \"John has a part-time job.\",\n            \"reason\": \"There is no information
+      in the context about John having a part-time job.\",\n            \"verdict\":
+      0\n        }\n    ]\n}\n-----------------------------\n\nNow perform the same
+      with the following input\ninput: {\n    \"context\": \"The Eiffel Tower was
+      constructed from 1887 to 1889.\",\n    \"statements\": [\n        \"The Eiffel
+      Tower was built in 1889.\"\n    ]\n}\nOutput: ","role":"user"}],"model":null,"stream":true,"stream_options":{"include_usage":true},"tool_choice":{"type":"function","function":{"name":"StatementFaithfulnessOutput"}},"tools":[{"type":"function","function":{"name":"StatementFaithfulnessOutput","description":"Output
+      from NLI statement evaluation.","parameters":{"properties":{"statements":{"items":{"description":"Individual
+      statement with reason and verdict for NLI evaluation.","properties":{"statement":{"type":"string"},"reason":{"type":"string"},"verdict":{"type":"integer"}},"required":["statement","reason","verdict"],"type":"object"},"type":"array"}},"required":["statements"],"type":"object"}}}]}'
+    headers:
+      Content-Type:
+      - application/json
+      api-key:
+      - REDACTED
+      authorization:
+      - REDACTED
+      host:
+      - dial.test.example.com
+    method: POST
+    uri: https://dial.test.example.com/openai/deployments/gemini-2.5-flash-lite/chat/completions?api-version=2023-12-01-preview
+  response:
+    body:
+      string: 'data: {"choices":[{"index":0,"finish_reason":null,"delta":{"role":"assistant"}}],"usage":null,"id":"52555145-651e-4dc4-9ae6-ee4a5906a2dc","created":1775497855,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":null,"tool_calls":[{"index":0,"id":"StatementFaithfulnessOutput_1","type":"function","function":{"name":"StatementFaithfulnessOutput","arguments":"{\"statements\":
+        [{\"reason\": \"The context states that the Eiffel Tower was constructed from
+        1887 to 1889. While 1889 is within this range, the statement implies it was
+        completed in that specific year, which is not directly stated. However, it
+        can be inferred that it was built in 1889 as it was built *from* 1887 *to*
+        1889.\", \"statement\": \"The Eiffel Tower was built in 1889.\", \"verdict\":
+        1}]}"}}]}}],"usage":null,"id":"52555145-651e-4dc4-9ae6-ee4a5906a2dc","created":1775497855,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":""}}],"usage":null,"id":"52555145-651e-4dc4-9ae6-ee4a5906a2dc","created":1775497855,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":"tool_calls","delta":{}}],"usage":{"prompt_tokens":718,"completion_tokens":109,"total_tokens":827},"id":"52555145-651e-4dc4-9ae6-ee4a5906a2dc","created":1775497855,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: [DONE]
+
+
+        '
+    headers:
+      Content-Type:
+      - text/event-stream; charset=utf-8
+    status:
+      code: 200
+      message: OK
+version: 1

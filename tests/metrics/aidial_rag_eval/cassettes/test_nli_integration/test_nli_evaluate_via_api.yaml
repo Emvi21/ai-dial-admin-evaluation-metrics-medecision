@@ -1,0 +1,136 @@
+interactions:
+- request:
+    body: '{"messages":[{"content":"\nBreak down each hypothesis into statements,
+      if hypothesis is complex. Else return hypothesis as a single statement.\n\nA
+      statement is a declarative independent self-contained non-overlapping substring
+      forming a complete sentence derived from the hypothesis.\n\nSingle words, signs,
+      numbers, links, etc. are not statements.\n\nYour response must be in JSON format:\n```json\n{\n    \"hypothesis_statements\":
+      [\n        {\n            \"statements\": [\n                <<statement1 from
+      the first hypothesis>>,\n                <<statement2 from the first hypothesis>>,\n                ...\n            ]\n        },\n        {\n            \"statements\":
+      [\n                <<statement1 from the second hypothesis>>,\n                <<statement2
+      from the second hypothesis>>,\n                ...\n            ]\n        },\n        ...\n    ]\n}\n```\n\nRequest:\nHypotheses:\n\n<hypothesis1>
+      The Earth has a diameter of about 12,742 km. </hypothesis1>\n","role":"user"}],"model":null,"stream":true,"stream_options":{"include_usage":true}}'
+    headers:
+      Content-Type:
+      - application/json
+      api-key:
+      - REDACTED
+      authorization:
+      - REDACTED
+      host:
+      - dial.test.example.com
+    method: POST
+    uri: https://dial.test.example.com/openai/deployments/gemini-2.5-flash-lite/chat/completions?api-version=2023-12-01-preview
+  response:
+    body:
+      string: 'data: {"choices":[{"index":0,"finish_reason":null,"delta":{"role":"assistant"}}],"usage":null,"id":"5a6b6a72-682e-4927-a4e9-051a0b271e34","created":1775479156,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"```"}}],"usage":null,"id":"5a6b6a72-682e-4927-a4e9-051a0b271e34","created":1775479156,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"json\n{\n    "}}],"usage":null,"id":"5a6b6a72-682e-4927-a4e9-051a0b271e34","created":1775479156,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"\"hypothesis_statements\":
+        [\n        {\n            \"statements\": [\n                "}}],"usage":null,"id":"5a6b6a72-682e-4927-a4e9-051a0b271e34","created":1775479156,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"\"The
+        Earth has a diameter of about 12,742 km.\"\n"}}],"usage":null,"id":"5a6b6a72-682e-4927-a4e9-051a0b271e34","created":1775479156,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"            ]\n        }\n    ]\n}\n```"}}],"usage":null,"id":"5a6b6a72-682e-4927-a4e9-051a0b271e34","created":1775479156,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":""}}],"usage":null,"id":"5a6b6a72-682e-4927-a4e9-051a0b271e34","created":1775479156,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":"stop","delta":{}}],"usage":{"prompt_tokens":202,"completion_tokens":53,"total_tokens":255},"id":"5a6b6a72-682e-4927-a4e9-051a0b271e34","created":1775479156,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: [DONE]
+
+
+        '
+    headers:
+      Content-Type:
+      - text/event-stream; charset=utf-8
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"messages":[{"content":"\nNatural language inference is the task of determining
+      whether the hypothesis is an entailment, contradiction, or neutral with respect
+      to the premise.\nA hypothesis is a list of statements provided below. \n\n\n\nA
+      statement is considered an entailment if it logically follows from the premise.\nA
+      statement is considered a contradiction if it is logically inconsistent with
+      the premise.\nElse a statement is considered a neutral.\nImportant: Don''t reject
+      entailment just because of minor extra details - if the main meaning holds,
+      it''s still entailment.\n\nFor each statement:\nProvide a brief short(1 sentences)
+      explanation of whether the statement is an entailment, contradiction or neutral
+      with respect to the premise.\nAssign tags based on your explanation: \"ENT\"
+      for entailment, \"CONT\" for contradiction, \"NEUT\" for neutral or if none
+      of the above tags apply.\n\nFormat your response in JSON. You must return only
+      JSON.\n\nFor example, if the premise is \"I am a biology graduate and I work
+      at a tech company.\" and the list of statements is [\"I am a graduate.\", \"I
+      work at a hospital.\"] your response should be:\n\n```json\n{\n    \"statement_inference\":
+      [\n        {\n            \"explanation\": \"It is true that I am a graduate\",\n            \"tag\":
+      \"ENT\"\n        },\n        {\n            \"explanation\": \"Premise states
+      I work at a tech company, not a hospital.\",\n            \"tag\": \"CONT\"\n        }\n    ]\n}\n```\n\nYour
+      response must be in JSON format:\n```json\n{\n    \"statement_inference\": [\n        {\n            \"explanation\":
+      <<explanation>>,\n            \"tag\": <<\"ENT\" or \"CONT\" or \"NEUT\">>\n        },\n        ...\n    ]\n}\n```\nRequest:\n\n\n<premise>\nThe
+      Earth is the third planet from the Sun. The diameter of the Earth is approximately
+      12,742 kilometers.\n</premise>\n\nList of statements:\n\n<statement1> The Earth
+      has a diameter of about 12,742 km. </statement1>\n","role":"user"}],"model":null,"stream":true,"stream_options":{"include_usage":true}}'
+    headers:
+      Content-Type:
+      - application/json
+      api-key:
+      - REDACTED
+      authorization:
+      - REDACTED
+      host:
+      - dial.test.example.com
+    method: POST
+    uri: https://dial.test.example.com/openai/deployments/gemini-2.5-flash-lite/chat/completions?api-version=2023-12-01-preview
+  response:
+    body:
+      string: 'data: {"choices":[{"index":0,"finish_reason":null,"delta":{"role":"assistant"}}],"usage":null,"id":"ee1455d8-1112-4f4d-91d6-ea982f4d7431","created":1775479157,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"```"}}],"usage":null,"id":"ee1455d8-1112-4f4d-91d6-ea982f4d7431","created":1775479157,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"json\n{\n    "}}],"usage":null,"id":"ee1455d8-1112-4f4d-91d6-ea982f4d7431","created":1775479157,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"\"statement_inference\":
+        [\n        {\n            \"explanation\": \"The statement"}}],"usage":null,"id":"ee1455d8-1112-4f4d-91d6-ea982f4d7431","created":1775479157,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":" directly
+        repeats information provided in the premise about the Earth''s diameter.\",\n            "}}],"usage":null,"id":"ee1455d8-1112-4f4d-91d6-ea982f4d7431","created":1775479157,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":"\"tag\":
+        \"ENT\"\n        }\n    ]\n}\n```"}}],"usage":null,"id":"ee1455d8-1112-4f4d-91d6-ea982f4d7431","created":1775479157,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":null,"delta":{"content":""}}],"usage":null,"id":"ee1455d8-1112-4f4d-91d6-ea982f4d7431","created":1775479157,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: {"choices":[{"index":0,"finish_reason":"stop","delta":{}}],"usage":{"prompt_tokens":454,"completion_tokens":55,"total_tokens":509},"id":"ee1455d8-1112-4f4d-91d6-ea982f4d7431","created":1775479157,"object":"chat.completion.chunk","model":"gemini-2.5-flash-lite"}
+
+
+        data: [DONE]
+
+
+        '
+    headers:
+      Content-Type:
+      - text/event-stream; charset=utf-8
+    status:
+      code: 200
+      message: OK
+version: 1

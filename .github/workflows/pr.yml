@@ -10,7 +10,7 @@ concurrency:
 
 jobs:
   run_tests:
-    uses: epam/ai-dial-ci/.github/workflows/python_docker_pr.yml@4.6.1
+    uses: epam/ai-dial-ci/.github/workflows/python_docker_pr.yml@4.7.0
     with:
       python-version: "3.14"
       poetry-version: "2.4.1"

@@ -16,6 +16,9 @@ RUN poetry install --no-interaction --no-ansi --no-cache --no-root \
 COPY . ./
 RUN poetry install --no-interaction --no-ansi --no-cache --only main
 
+# nltk punkt_tab is required for ai-dial-rag-eval
+RUN poetry run python -m nltk.downloader -d /usr/share/nltk_data punkt_tab
+
 
 FROM base AS server
 
@@ -24,10 +27,12 @@ USER appuser
 
 # Copy the sources and virtual env. No poetry.
 COPY --chown=appuser --from=builder /app .
+COPY --chown=appuser --from=builder /usr/share/nltk_data /usr/share/nltk_data
 
 ENV PATH="/app/.venv/bin:$PATH"
 
 ENV DEEPEVAL_TELEMETRY_OPT_OUT=1
+
 
 EXPOSE 5000
 CMD ["uvicorn", "aidial_admin_evaluation_metrics.main:app", "--host", "0.0.0.0", "--port", "5000"]

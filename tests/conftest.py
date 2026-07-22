@@ -10,6 +10,7 @@ from aidial_admin_evaluation_metrics.app_config import AppSettings
 pytest_plugins = [
     "tests.fixtures.dial",
     "tests.fixtures.vcr",
+    "tests.fixtures.nltk",
 ]
 
 # Load .env file at test session start (before any fixtures)

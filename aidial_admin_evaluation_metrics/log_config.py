@@ -1,17 +1,13 @@
 import logging
-import os
-import sys
 from enum import StrEnum
 
-from opentelemetry.instrumentation.auto_instrumentation import (
-    initialize as opentelemetry_initialize,
-)
-from opentelemetry.instrumentation.logging.environment_variables import (
-    OTEL_PYTHON_LOG_CORRELATION,
-)
+from aidial_sdk import configure_root_logger
+from aidial_sdk.telemetry.init import init_telemetry
+from aidial_sdk.telemetry.types import TelemetryConfig
+from opentelemetry.instrumentation.asyncio import AsyncioInstrumentor
+from opentelemetry.instrumentation.threading import ThreadingInstrumentor
 from pydantic import Field
 from pydantic_settings import BaseSettings
-from uvicorn.logging import DefaultFormatter
 
 logger = logging.getLogger(__name__)
 
@@ -58,26 +54,16 @@ def configure_log_levels():
     uvicorn_access_logger.propagate = True
 
 
-def configure_root_logger_handler():
-    root = logging.getLogger()
-    formatter = DefaultFormatter(
-        fmt="%(levelprefix)s | %(asctime)s | %(name)s | %(process)d | %(message)s",
-        datefmt="%Y-%m-%d %H:%M:%S",
-        use_colors=True,
-    )
-
-    handler = logging.StreamHandler(sys.stderr)
-    handler.setFormatter(formatter)
-    root.addHandler(handler)
-
-
 def init_logging_and_telemetry():
-    opentelemetry_initialize()
+    # We want to initialize logging and telemetry before everything else
+    # to be able to capture logs from the initialization process
+    # The app instrumentation is done in main.py after the app is created
+    init_telemetry(app=None, config=TelemetryConfig())
+    configure_root_logger()
 
-    otel_log_correlation = (
-        os.getenv(OTEL_PYTHON_LOG_CORRELATION, "false").lower() == "true"
-    )
-    if not otel_log_correlation:
-        configure_root_logger_handler()
-    # else OpenTelemetry LoggingInstrumentor will set the logging handlers in opentelemetry_initialize()
+    # We do not have the auto-instrumentation with aidial_sdk
+    # We need to manually instrument what the SDK is not instrumenting for us
+    AsyncioInstrumentor().instrument()
+    ThreadingInstrumentor().instrument()
+
     configure_log_levels()

@@ -62,8 +62,6 @@ Copy `.env.example` to `.env` and customize it for your environment:
 
 |Variable|Default|Description|
 |---|---|---|
-|LOG_LEVEL|INFO|Log level. Use `DEBUG` for development and `INFO` in production. Allowed values: `CRITICAL`, `ERROR`, `WARNING`, `INFO`, `DEBUG`.|
-|LOG_LEVEL_OVERRIDE|{}|Override log level for specific modules (JSON dict, e.g., `{"uvicorn.access":"INFO"}`).|
 |DIAL_URL|*Required*|Base URL of the DIAL API endpoint (e.g., `https://your-dial-instance.example.com`). Used for all LLM and embeddings calls made by LLM-based metrics.|
 |DIAL_API_KEY|*Empty*|API key for authenticating all requests to the DIAL instance. Used for all LLM and embeddings calls made by LLM-based metrics. Required for any LLM-based or embeddings-based metric to work. Without it, only metrics that do not call LLMs (e.g., `exact_match`, `regex_match`, `deepdiff`) will work.|
 |EVAL__APP__MAX_CONCURRENT_EVALUATIONS|10|Maximum number of evaluation requests processed concurrently. Requests beyond this limit are queued.|
@@ -81,6 +79,20 @@ Copy `.env.example` to `.env` and customize it for your environment:
 |EVAL__METRICS__RAGAS__EMBEDDINGS_MODEL|`text-embedding-ada-002`|DIAL deployment name of the embeddings model used by Ragas metrics that require semantic similarity (e.g., `ragas.answer_relevancy`). Must be an embeddings deployment available on the configured DIAL instance.|
 
 OpenTelemetry configuration is supported via standard environment variables. See [OpenTelemetry documentation](https://opentelemetry.io/docs/languages/sdk-configuration/general/) for available options.
+
+### Logging configuration environment variables
+
+| Variable | Default | Description |
+|---|---|---|
+| LOG_LEVEL | `INFO` | Log level. Use `DEBUG` for development and `INFO` in production. Allowed values: `CRITICAL`, `ERROR`, `WARNING`, `INFO`, `DEBUG`. |
+| LOG_LEVEL_OVERRIDE | `{}` | Override log level for specific modules (JSON dict, e.g., `{"uvicorn.access":"INFO"}`). |
+| DIAL_SDK_LOG_FORMAT | `text` | Logging format. Can be set to `text` or `json`. Implemented by the DIAL SDK. |
+| DIAL_SDK_TEXT_LOG_FORMAT | `'%(levelprefix)s | %(asctime)s | %(name)s | %(process)d | %(message)s'` | Logging format for text logs. Implemented by the DIAL SDK. |
+| DIAL_SDK_JSON_LOG_FORMAT | `'{"level": "%(levelname)s", "time": "%(asctime)s", "logger": "%(name)s", "process": "%(process)d", "message": "%(message)s"}'` | Logging format for JSON logs. Implemented by the DIAL SDK. |
+
+The logging format is configured by the DIAL SDK. By default, the logs are in text format. You can change the logging format to JSON by setting the `DIAL_SDK_LOG_FORMAT` environment variable to `json`. The logging format can be further customized using the `DIAL_SDK_TEXT_LOG_FORMAT` or `DIAL_SDK_JSON_LOG_FORMAT` environment variables.
+
+See the [full logging documentation](https://github.com/epam/ai-dial-sdk/blob/0.39.0/docs/logging.md) for the details on the logging configuration and available logging modes.
 
 ## Run
 

@@ -9,6 +9,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 logger = logging.getLogger(__name__)
 
 SUPPORTED_MODELS: list[str] = [
+    "gemini-3.5-flash",
     "gemini-2.5-flash-lite",
     "gpt-5-nano-2025-08-07",
     "anthropic.claude-haiku-4-5-20251001-v1:0",
@@ -16,7 +17,7 @@ SUPPORTED_MODELS: list[str] = [
     "gpt-5-mini-2025-08-07",
     "gpt-5.4-mini-2026-03-17",
 ]
-DEFAULT_MODEL: str = "gemini-3.1-flash-lite-preview"
+DEFAULT_MODEL: str = "gemini-3.5-flash"
 
 
 @dataclass(frozen=True)
@@ -51,38 +52,24 @@ class CommonGroupSettings(BaseModel):
     default_model: str | None = None
 
 
-class DeepEvalGroupSettings(CommonGroupSettings):
-    """Settings for all deepeval-backed metrics."""
+class MafGroupSettings(CommonGroupSettings):
+    """Settings for MAF evaluation metrics."""
 
-    verbose_mode: bool = False
-
-
-class AidialRagEvalGroupSettings(CommonGroupSettings):
-    """Settings for all aidial-rag-eval-backed metrics."""
-
-    max_concurrency: int = 8
-
-
-class RagasGroupSettings(CommonGroupSettings):
-    """Settings for all ragas-backed metrics."""
-
-    embeddings_model: str | None = None
+    pass
 
 
 class MetricsSettings(BaseModel):
     """Settings for all metric groups, passed to the registry at startup."""
 
     common: CommonGroupSettings = CommonGroupSettings()
-    deepeval: DeepEvalGroupSettings = DeepEvalGroupSettings()
-    aidial_rag_eval: AidialRagEvalGroupSettings = AidialRagEvalGroupSettings()
-    ragas: RagasGroupSettings = RagasGroupSettings()
+    maf: MafGroupSettings = MafGroupSettings()
 
     @model_validator(mode="after")
     def _resolve_group_fallbacks(self) -> "MetricsSettings":
         """Fill each group's None model fields from common settings, then validate."""
         global_supported = self.common.supported_models or SUPPORTED_MODELS
         global_default = self.common.default_model or DEFAULT_MODEL
-        for group in (self.deepeval, self.aidial_rag_eval, self.ragas):
+        for group in (self.maf,):
             if group.supported_models is None:
                 group.supported_models = list(global_supported)
             if group.default_model is None:
@@ -110,6 +97,9 @@ class AppSettings(BaseSettings):
         env_nested_delimiter="__",
         env_ignore_empty=True,
         populate_by_name=True,
+        env_file=".env",
+        env_file_encoding="utf-8",
+        extra="ignore",
     )
 
     dial_url: str = Field(default="", validation_alias="DIAL_URL")

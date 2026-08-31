@@ -14,9 +14,7 @@ def _create_instances(
     """Explicitly construct every metric instance with its resolved settings."""
     s = settings.maf
     return [
-        maf_metrics.Node1QuestionnaireMetric(dial_factory, s),
-        maf_metrics.Node2QAExtractionMetric(dial_factory, s),
-        maf_metrics.Node3DecisionMetric(dial_factory, s),
+        maf_metrics.MAFPipelineMetric(dial_factory, s),
     ]
 
 

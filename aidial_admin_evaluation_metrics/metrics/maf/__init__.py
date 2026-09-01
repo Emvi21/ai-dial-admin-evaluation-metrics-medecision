@@ -1,3 +1,6 @@
+from aidial_admin_evaluation_metrics.metrics.maf.clinical_summary import (
+    ClinicalSummaryMetric,
+)
 from aidial_admin_evaluation_metrics.metrics.maf.node1_questionnaire import (
     Node1QuestionnaireMetric,
 )
@@ -12,6 +15,7 @@ from aidial_admin_evaluation_metrics.metrics.maf.pipeline import (
 )
 
 __all__ = [
+    "ClinicalSummaryMetric",
     "Node1QuestionnaireMetric",
     "Node2QAExtractionMetric",
     "Node3DecisionMetric",

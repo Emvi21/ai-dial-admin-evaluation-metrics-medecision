@@ -15,6 +15,7 @@ def _create_instances(
     s = settings.maf
     return [
         maf_metrics.MAFPipelineMetric(dial_factory, s),
+        maf_metrics.ClinicalSummaryMetric(dial_factory, s),
     ]
 
 
